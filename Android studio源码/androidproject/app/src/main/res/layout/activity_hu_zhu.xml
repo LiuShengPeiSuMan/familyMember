@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hz_drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.HomepageActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/hz_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#3F51B5"
+            android:gravity="center"
+            app:navigationIcon="@mipmap/cebianlan02"
+            app:title="标题"
+            app:titleTextColor="#ffffff" />
+
+        <LinearLayout
+            android:id="@+id/linearfragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/hz_nav"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        app:headerLayout="@layout/homehearder"
+        app:menu="@menu/huzhulist" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

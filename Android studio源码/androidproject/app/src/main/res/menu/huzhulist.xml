@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/it1"
+        android:icon="@mipmap/index01"
+        android:title="首页" />
+    <item
+        android:id="@+id/it2"
+        android:icon="@mipmap/index02"
+        android:title="家族成员" />
+
+    <item
+        android:id="@+id/it3"
+        android:icon="@mipmap/index03"
+        android:title="户主管理" />
+    <item
+        android:id="@+id/it4"
+        android:icon="@mipmap/index04"
+        android:title="家庭成员" />
+    <item
+        android:id="@+id/it5"
+        android:icon="@mipmap/index05"
+        android:title="出生成员" />
+    <item
+        android:id="@+id/it6"
+        android:icon="@mipmap/index06"
+        android:title="成员统计" />
+    <item
+        android:id="@+id/it7"
+        android:icon="@mipmap/index07"
+        android:title="提交记录" />
+</menu>

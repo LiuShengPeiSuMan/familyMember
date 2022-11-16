@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.Email_LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_margin="10dp"
+        android:src="@mipmap/email_login" />
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/email_login"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="邮箱："
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/emailloginet"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入邮箱号"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/email_login"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/emailcode"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="验证码"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/getcode"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="#F44336"
+            android:gravity="center"
+            android:text="发送验证码"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/emaillogin"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button"
+        android:text="登  录"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+</LinearLayout>

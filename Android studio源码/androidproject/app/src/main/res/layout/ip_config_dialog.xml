@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="配置IP和端口"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:src="@mipmap/ip" />
+
+        <EditText
+            android:id="@+id/ip"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:background="@drawable/email_login"
+            android:hint="输入IP"
+            android:inputType="number"
+            android:paddingLeft="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@mipmap/host" />
+
+        <EditText
+            android:id="@+id/host"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:background="@drawable/email_login"
+            android:focusable="false"
+            android:hint="输入端口"
+            android:inputType="number"
+            android:paddingLeft="4dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ok_config"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button"
+        android:text="提交配置"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+</LinearLayout>

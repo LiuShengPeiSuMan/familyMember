@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.FamilyMemberDao">
+
+    <resultMap id="FamilyMember" type="com.liushengpei.pojo.FamilyMember">
+        <!--        主键id-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <!--        姓名-->
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <!--        年龄-->
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <!--        性别（1：男，0：女）-->
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <!--        家庭住址-->
+        <result column="home_address" jdbcType="VARCHAR" property="homeAddress"/>
+        <!--        出生日期-->
+        <result column="date_of_birth" jdbcType="DATE" property="dateOfBirth"/>
+        <!--        死亡日期-->
+        <result column="date_of_death" jdbcType="DATE" property="dateOfDeath"/>
+        <!--        是否已婚（1：是，0：否）-->
+        <result column="married_of_not" jdbcType="INTEGER" property="marriedOfNot"/>
+        <!--        学历(0：未上学，1：幼儿园，2：小学，3：初中，4：普高，5：中专，6：大学，7：大专，8：研究生，9：博士，10：硕士)-->
+        <result column="education" jdbcType="INTEGER" property="education"/>
+        <!--        工作-->
+        <result column="work" jdbcType="VARCHAR" property="work"/>
+        <!--        工作地址-->
+        <result column="work_address" jdbcType="VARCHAR" property="workAddress"/>
+        <!--        联系电话-->
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <!--        邮箱-->
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <!--        创建时间-->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <!--        更新时间-->
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <!--        创建人-->
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <!--        更新人-->
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <!--        删除标识（0：未删除，1：已删除）-->
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+    <!--查询所有-->
+    <select id="selectAll" resultType="list" parameterType="string" resultMap="FamilyMember">
+        SELECT *
+        FROM family_member
+        WHERE del_flag = 0
+        <if test="_parameter!=null and _parameter!=''">
+            AND name =#{name}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <!--    添加家族成员-->
+    <insert id="addMember" parameterType="com.liushengpei.pojo.FamilyMember">
+        INSERT INTO family_member(id, name, age, sex, home_address, date_of_birth, date_of_death, married_of_not,
+                                  education, work, work_address, phone, email, create_time, update_time, create_user,
+                                  update_user, del_flag)
+        VALUES (#{id}, #{name}, #{age}, #{sex}, #{homeAddress}, #{dateOfBirth}, #{dateOfDeath}, #{marriedOfNot},
+                #{education}, #{work},
+                #{workAddress}, #{phone}, #{email}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser}, 0)
+    </insert>
+
+    <!--    查询家族成员生日-->
+    <select id="peopleBirthday" resultType="list" resultMap="FamilyMember">
+        SELECT *
+        FROM family_member
+        WHERE DATEDIFF(date_of_birth, NOW()) &lt; 7
+          AND DATEDIFF(date_of_birth, NOW()) &gt;= 0
+        ORDER BY date_of_birth ASC
+    </select>
+
+    <!--    查询当天生日家族成员-->
+    <select id="selectNowDay" resultType="list" resultMap="FamilyMember">
+        SELECT *
+        FROM family_member
+        WHERE del_flag = 0
+            AND date_of_birth IS NOT NULL
+            AND MONTH (
+            date_of_birth ) = MONTH (NOW())
+          AND DAY ( date_of_birth ) = DAY (NOW())
+    </select>
+
+    <!--    根据id查询家族成员详细信息-->
+    <select id="peopleDetailedById" parameterType="string" resultType="com.liushengpei.pojo.FamilyMember"
+            resultMap="FamilyMember">
+        SELECT *
+        FROM family_member
+        WHERE del_flag = 0
+          AND id = #{id}
+    </select>
+
+    <!--    查询指定成员-->
+    <select id="queryRepeat" parameterType="map" resultType="integer">
+        SELECT COUNT(*) AS number
+        FROM family_member
+        WHERE del_flag = 0
+          AND name = #{name}
+          AND sex = #{sex}
+          AND age = #{age}
+    </select>
+
+    <!--    删除家族成员-->
+    <update id="delFamilyMember" parameterType="string">
+        UPDATE family_member
+        SET del_flag=1
+        WHERE id = #{id}
+    </update>
+
+    <!--    删除家族成员-->
+    <delete id="delFamilyMember02" parameterType="string">
+        DELETE
+        FROM family_member
+        WHERE id = #{id}
+    </delete>
+
+    <!--    修改家族成员详细信息-->
+    <update id="updateFamilyMember" parameterType="map">
+        UPDATE family_member
+        <set>
+            <if test="homeAddress!=null and homeAddress!=''">
+                home_address=#{homeAddress},
+            </if>
+            <if test="dateOfDeath!=null and dateOfDeath!=''">
+                date_of_death=#{dateOfDeath},
+            </if>
+            <if test="marriedOfNot!=null and marriedOfNot!=''">
+                married_of_not=#{marriedOfNot},
+            </if>
+            <if test="education!=null and education!=''">
+                education=#{education},
+            </if>
+            <if test="work!=null and work!=''">
+                work=#{work},
+            </if>
+            <if test="workAddress!=null and workAddress!=''">
+                work_address=#{workAddress},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                update_user=#{updateUser},
+            </if>
+        </set>
+        WHERE del_flag=0 AND id=#{id}
+    </update>
+
+    <!--    判断有没有此成员-->
+    <select id="queryName" parameterType="string" resultType="integer">
+        SELECT COUNT(name) AS number
+        FROM family_member
+        WHERE name = #{name}
+    </select>
+
+    <!--    查询男女人数-->
+    <select id="manAndWomanNum" resultType="hashmap">
+        SELECT CASE sex WHEN '1' THEN '男' WHEN '0' THEN '女' END AS sex, COUNT(*) num
+        FROM family_member
+        WHERE del_flag = 0
+        GROUP BY sex
+    </select>
+
+    <!--    查询所有人的年龄-->
+    <select id="queryAllAge" resultType="integer">
+        SELECT TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) AS age
+        FROM family_member
+        WHERE del_flag = 0
+    </select>
+
+    <!--    查询成员具体年龄-->
+    <select id="queryAgeByName" resultType="integer">
+        SELECT TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) AS age
+        FROM family_member
+        WHERE del_flag = 0
+          AND id = #{id}
+    </select>
+
+    <!--    修改成员年龄-->
+    <update id="updateAge" parameterType="map">
+        UPDATE family_member
+        SET age=#{age}
+        WHERE del_flag = 0
+          AND id = #{id}
+    </update>
+
+</mapper>

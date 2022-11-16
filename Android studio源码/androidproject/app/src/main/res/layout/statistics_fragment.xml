@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="出生成员年度统计"
+                android:textColor="#3F51B5"
+                android:textSize="17dp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_statistical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="家族成员年龄段统计"
+                android:textColor="#3F51B5"
+                android:textSize="17dp" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/columnar_statistical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="家族成员性别统计"
+                android:textColor="#3F51B5"
+                android:textSize="17dp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/cake_statistical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

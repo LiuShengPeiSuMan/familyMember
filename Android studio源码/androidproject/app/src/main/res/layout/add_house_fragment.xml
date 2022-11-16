@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/add_house02" />
+
+    <TextView
+        android:id="@+id/add_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:gravity="center"
+        android:text="添加户主"
+        android:textColor="#3F51B5"
+        android:textSize="17dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="户主姓名:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_name"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入姓名"
+                    android:inputType="text"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="户主性别:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <RadioGroup
+                    android:id="@+id/group_sex"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:checked="true"
+                        android:text="男" />
+
+                    <RadioButton
+                        android:id="@+id/woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:text="女" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="户主年龄:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_age"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入年龄"
+                    android:inputType="number"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="家庭住址:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_houseaddress"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入家庭住址"
+                    android:inputType="text"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="出生日期:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_date"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:hint="请输入出生日期"
+                    android:inputType="datetime"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="是否已婚:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <RadioGroup
+                    android:id="@+id/group_married"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:checked="true"
+                        android:text="是" />
+
+                    <RadioButton
+                        android:id="@+id/no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:text="否" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="户主学历:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <Spinner
+                    android:id="@+id/h_school"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/spinner"
+                    android:entries="@array/add_house"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="工作职位:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_work"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入工作职位"
+                    android:inputType="text"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="工作地点:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_workaddress"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入工作地点"
+                    android:inputType="textAutoComplete"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="电话号码:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_phone"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入电话号码"
+                    android:inputType="phone"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="电子邮箱:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_email"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入电子邮箱"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="门牌编号:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/h_houseNumber"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/email_login"
+                    android:gravity="center_vertical"
+                    android:hint="请输入门牌号"
+                    android:inputType="number"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/add_ok"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button"
+                android:text="添 加"
+                android:textColor="#ffffff"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

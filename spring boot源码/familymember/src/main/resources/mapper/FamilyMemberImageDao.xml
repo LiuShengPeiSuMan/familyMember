@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.FamilyMemberImageDao">
+    <resultMap id="familyMemberImage" type="com.liushengpei.pojo.FamilyMemberImage">
+        <!--        主键id-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <!--        家族成员id-->
+        <result column="family_member_id" jdbcType="VARCHAR" property="familyMemberId"/>
+        <!--        头像-->
+        <result column="image" jdbcType="BLOB" property="image"/>
+        <!--        创建时间-->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <!--        创建人-->
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <!--        更新时间-->
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <!--        更新人-->
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <!--        删除标记-->
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+
+    <!--    添加家族成员头像-->
+    <insert id="addImage" parameterType="com.liushengpei.pojo.FamilyMemberImage">
+        INSERT INTO family_member_image(id, family_member_id, image, create_time, create_user, update_time, update_user,
+                                        del_flag)
+        VALUES (#{id}, #{familyMemberId}, #{image}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser},
+                #{delFlag})
+    </insert>
+
+</mapper>

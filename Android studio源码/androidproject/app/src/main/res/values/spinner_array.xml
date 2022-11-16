@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notice_type">
+        <item>紧急通知</item>
+        <item>一般通知</item>
+        <item>喜庆通知</item>
+        <item>丧事通知</item>
+    </string-array>
+    <string-array name="examine">
+        <item>全部记录</item>
+        <item>审核通过</item>
+        <item>审核驳回</item>
+    </string-array>
+    <string-array name="add_house">
+        <item>未上学</item>
+        <item>幼儿园</item>
+        <item>小学</item>
+        <item>初中</item>
+        <item>普高</item>
+        <item>中专</item>
+        <item>大学</item>
+        <item>大专</item>
+        <item>研究生</item>
+        <item>博士</item>
+        <item>硕士</item>
+    </string-array>
+    <!--    (0：未上学，1：幼儿园，2：小学，3：初中，4：普高，5：中专，6：大学，7：大专，8：研究生，9：博士，10：硕士)-->
+    <string-array name="isMarry">
+        <item>是</item>
+        <item>否</item>
+    </string-array>
+</resources>

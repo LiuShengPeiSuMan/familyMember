@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.PeopleHouseDao">
+
+    <resultMap id="peoplehouse" type="com.liushengpei.pojo.PeopleHouse">
+        <!--        主键id-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <!--        户主id-->
+        <result column="householder_id" jdbcType="VARCHAR" property="householderId"/>
+        <!--        家庭成员id-->
+        <result column="family_people_id" jdbcType="VARCHAR" property="familyPeopleId"/>
+        <!--        家庭成员与户主关系-->
+        <result column="relationship" jdbcType="VARCHAR" property="relationship"/>
+        <!--        创建时间-->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <!--        创建人-->
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <!--        更新时间-->
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <!--        更新人-->
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <!--        删除标记-->
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+
+    <!--    添加家庭成员与户主关系-->
+    <insert id="addPeopleHouse" parameterType="com.liushengpei.pojo.PeopleHouse">
+        INSERT INTO people_house(id, householder_id, family_people_id, name, relationship, create_time, create_user,
+                                 update_time, update_user, del_flag)
+        VALUES (#{id}, #{householderId}, #{familyPeopleId}, #{name}, #{relationship}, #{createTime}, #{createUser},
+                #{updateTime}, #{updateUser}, #{delFlag})
+    </insert>
+
+    <!--    查询户主id-->
+    <select id="queryHouseId" parameterType="string" resultType="string">
+        SELECT householder_id
+        FROM people_house
+        WHERE family_people_id = #{id}
+    </select>
+
+    <!--    删除家族成员-->
+    <update id="delPeopleHouse" parameterType="string">
+        UPDATE people_house
+        SET del_flag=1
+        WHERE family_people_id = #{id}
+    </update>
+
+    <!--    删除家族成员-->
+    <delete id="delPeopleHouse02" parameterType="string">
+        DELETE
+        FROM people_house
+        WHERE family_people_id = #{id}
+    </delete>
+
+    <!--    查询户主所有成员-->
+    <select id="queryAllPeopleHouse" parameterType="string" resultType="list" resultMap="peoplehouse">
+        SELECT p.*
+        FROM people_house p
+                 LEFT JOIN examine e ON p.family_people_id = e.babyorpeople_id
+        WHERE p.del_flag = 0
+          AND e.examine_status = 1
+          AND p.householder_id = #{householderId}
+    </select>
+
+    <!--    查询户主本人-->
+    <select id="queryHuzhu" parameterType="string" resultType="com.liushengpei.pojo.PeopleHouse"
+            resultMap="peoplehouse">
+        SELECT *
+        FROM people_house
+        WHERE del_flag = 0
+          AND relationship = '户主'
+          AND householder_id = #{householderId}
+    </select>
+
+    <!--    查询成员所属户主id-->
+    <select id="queryHouseIdByName" parameterType="string" resultType="string">
+        SELECT householder_id
+        FROM people_house
+        WHERE del_flag = 0
+          AND name = #{name}
+    </select>
+</mapper>

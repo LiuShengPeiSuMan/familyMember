@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.UserLoginDao">
+
+    <resultMap id="userlogin" type="com.liushengpei.pojo.UserLogin">
+        <!--        主键id-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <!--        账号-->
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <!--        密码-->
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <!--        登录邮箱-->
+        <result column="login_email" jdbcType="VARCHAR" property="loginEmail"/>
+        <!--        昵称-->
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <!--        角色（1：族长，2：户主，3：普通家族成员）-->
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <!--        创建时间-->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <!--        创建者-->
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <!--        更新时间-->
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <!--        更新人-->
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <!--        删除标识-->
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+
+    <!--    用户登录查询-->
+    <select id="userlogin" resultType="com.liushengpei.pojo.UserLogin" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND account = #{account}
+          AND password = #{password}
+    </select>
+
+    <!--    添加用户信息-->
+    <insert id="addUser" parameterType="com.liushengpei.pojo.UserLogin">
+        INSERT INTO user_login(id, account, password, login_email, nickname, role, create_time, create_user,
+                               update_time,
+                               update_user, del_flag)
+        VALUES (#{id}, #{account}, #{password}, #{loginEmail}, #{nickname}, #{role}, #{createTime}, #{createUser},
+                #{updateTime},
+                #{updateUser}, 0)
+    </insert>
+
+    <!--    查询此成员-->
+    <select id="selectMember" parameterType="string" resultType="integer">
+        SELECT COUNT(*) AS number
+        FROM user_login
+        WHERE del_flag = 0
+          AND account = #{account}
+    </select>
+
+    <!--    根据邮箱查询用户-->
+    <select id="selectEmailUser" parameterType="string" resultType="com.liushengpei.pojo.UserLogin"
+            resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND login_email = #{loginEmail}
+    </select>
+
+    <!--    查询所有用户登录-->
+    <select id="queryUserLogin" resultType="list" parameterType="string" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+        <if test="_parameter!=null and _parameter!=''">
+            AND nickname=#{name}
+        </if>
+        ORDER BY update_time DESC
+    </select>
+
+    <!--    重置用户密码-->
+    <update id="resetPassword" parameterType="map">
+        UPDATE user_login
+        SET password=#{password},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE id = #{id}
+    </update>
+
+    <!--    查看是否已有登录权限-->
+    <select id="isLogin" parameterType="string" resultType="integer">
+        SELECT COUNT(*) AS num
+        FROM user_login
+        WHERE del_flag = 0
+          AND nickname = #{nickname}
+    </select>
+
+    <!--    解除成员登录权限-->
+    <update id="relieveUserLogin" parameterType="map">
+        UPDATE user_login
+        SET del_flag=1,
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE id = #{id}
+    </update>
+
+    <!--    查询登录人详细信息-->
+    <select id="query" parameterType="string" resultType="com.liushengpei.pojo.UserLogin" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND id = #{id}
+    </select>
+
+    <!--    查询有没有族长登录-->
+    <select id="queryZz" resultType="integer">
+        SELECT COUNT(role) AS num
+        FROM user_login
+        WHERE del_flag = 0
+          AND role = 1
+    </select>
+</mapper>

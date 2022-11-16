@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefineprogressBarStyleSmall">
+        <item name="android:indeterminateDrawable">@drawable/progress_medium</item>
+    </style>
+</resources><!-- 加载进度 -->
+
+

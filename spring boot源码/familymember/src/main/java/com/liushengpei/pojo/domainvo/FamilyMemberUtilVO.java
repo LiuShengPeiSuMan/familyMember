@@ -12,6 +12,10 @@ public class FamilyMemberUtilVO implements Serializable {
 
     private static final long serialVersionUID = 25098768L;
 
+    //户主id
+    private String houseId;
+    //家庭成员id
+    private String familyMemberId;
     //死亡人口数
     private Integer deadNumber;
     //门牌号
@@ -84,6 +88,22 @@ public class FamilyMemberUtilVO implements Serializable {
     private String updateUser;
     //删除标识
     private Integer delFlag;
+
+    public String getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(String houseId) {
+        this.houseId = houseId;
+    }
+
+    public String getFamilyMemberId() {
+        return familyMemberId;
+    }
+
+    public void setFamilyMemberId(String familyMemberId) {
+        this.familyMemberId = familyMemberId;
+    }
 
     public Integer getDeadNumber() {
         return deadNumber;

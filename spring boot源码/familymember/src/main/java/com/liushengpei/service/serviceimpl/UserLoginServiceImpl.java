@@ -8,7 +8,6 @@ import com.liushengpei.pojo.UserLogin;
 import com.liushengpei.service.IUserLoginService;
 import com.liushengpei.util.EmailSendUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;

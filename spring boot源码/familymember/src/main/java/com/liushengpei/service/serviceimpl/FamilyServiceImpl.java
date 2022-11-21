@@ -1,11 +1,13 @@
 package com.liushengpei.service.serviceimpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liushengpei.dao.*;
 import com.liushengpei.pojo.*;
 import com.liushengpei.pojo.domainvo.FamilyMemberUtilVO;
 import com.liushengpei.service.IFamilyService;
 import com.liushengpei.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,9 @@ public class FamilyServiceImpl implements IFamilyService {
     private HouseSituationDao houseSituationDao;
     @Autowired
     private FamilyMemberImageDao memberImageDao;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     /**
      * 添加家庭成员(户主添加)
@@ -44,11 +49,6 @@ public class FamilyServiceImpl implements IFamilyService {
         //查询户主id
         String houseId = houseSituationDao.queryHouseId(familyMembervo.getLoginName());
         //判断此成员是否添加过
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("name", familyMembervo.getName());
-//        params.put("sex", familyMembervo.getSex());
-//        params.put("age", familyMembervo.getAge());
-//        Integer integer = familyMemberDao.queryRepeat(params);
         Integer integer1 = familyMemberDao.queryName(familyMembervo.getName());
         if (integer1 > 0) {
             return "此成员以添加过，请重新添加！";

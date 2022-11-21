@@ -137,9 +137,6 @@ public class LoginController {
         if (pwd == null || pwd.equals("")) {
             return Result.fail("密码不能为空");
         }
-        if (email == null || email.equals("")) {
-            return Result.fail("再次确认密码不能为空");
-        }
         String s = service.initZuZhang(name, account, pwd, email);
         return Result.success(s);
     }

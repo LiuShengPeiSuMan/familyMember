@@ -1,0 +1,52 @@
+server:
+  port: 5314
+spring:
+  application:
+    name: userlogin
+  cloud:
+    nacos:
+      server-addr: 192.168.209.152:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+  #数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.209.152:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+  #redis配置
+  redis:
+    host: 192.168.209.152
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲时间
+        min-idle: 0 #最小连接数
+        max-wait: 100 #连接等待时间
+  #发件人邮箱服务配置
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2726118282@qq.com
+    password: xiuxkjlltohjdgjb
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          auth: true
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+        #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        debug: true
+#指定mybatis映射文件路径
+mybatis:
+  #控制台打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

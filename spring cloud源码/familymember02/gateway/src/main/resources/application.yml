@@ -1,0 +1,35 @@
+server:
+  port: 6000
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: 192.168.209.154:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 开启自动定位（下面路由就不用配置），注意： 使用这种方式的时候，请求路径一定要遵循这个规则： http://网关ip:网关端口/服务名/资源（接口）路径
+            #      routes:  #配置路由
+            #        - id: userlogin
+            #          uri: lb://userlogin
+            #          predicates:
+            #            - Path=/userlogin/**
+            #        - id: homepage
+            #          uri: lb://homepage
+            #          predicates:
+            #            - Path=/homepage/**
+            #        - id: family-service
+            #          uri: lb://family-service
+            #          predicates:
+            #            - Path=/family/**
+            #        - id: familymember
+            #          uri: lb://family-member
+            #          predicates:
+            #            - Path=/familymember/**
+            #        - id: house-server
+            #          uri: lb://house-server
+            #          predicates:
+          #            - Path=/house/**

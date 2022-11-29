@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/babystration/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/examine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/family/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/familymember/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/homepage/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/house/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/toolutil/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userlogin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userlogin/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

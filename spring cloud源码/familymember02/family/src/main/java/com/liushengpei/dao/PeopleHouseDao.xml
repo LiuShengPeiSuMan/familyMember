@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.PeopleHouseDao">
+    <resultMap id="peoplehouse" type="com.liushengpei.pojo.PeopleHouse">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="householder_id" jdbcType="VARCHAR" property="householderId"/>
+        <result column="family_people_id" jdbcType="VARCHAR" property="familyPeopleId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="relationship" jdbcType="VARCHAR" property="relationship"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+    <!--添加家庭成员与户主关系-->
+    <insert id="addPeopleHouse" parameterType="com.liushengpei.pojo.PeopleHouse">
+        INSERT INTO people_house(id, householder_id, family_people_id, name, relationship, create_time, create_user,
+                                 update_time, update_user, del_flag)
+        VALUES (#{id}, #{householderId}, #{familyPeopleId}, #{name}, #{relationship}, #{createTime}, #{createUser},
+                #{updateTime}, #{updateUser}, #{delFlag})
+    </insert>
+
+    <!--    查询所有户主家庭成员-->
+    <select id="queryFamilyAll" parameterType="string" resultType="list" resultMap="peoplehouse">
+        SELECT *
+        FROM people_house
+        WHERE del_flag = 0
+          AND householder_id = #{householderId}
+    </select>
+
+    <!--    查询户主id-->
+    <select id="queryHouseIdByName" parameterType="string" resultType="string">
+        SELECT householder_id
+        FROM people_house
+        WHERE del_flag = 0
+          AND name = #{name}
+          AND relationship = '户主'
+    </select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.ExamineDao">
+    <resultMap id="examine" type="com.liushengpei.pojo.Examine">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="babyorpeople_id" jdbcType="VARCHAR" property="babyorpeopleId"/>
+        <result column="house_id" jdbcType="VARCHAR" property="houseId"/>
+        <result column="examine_type" jdbcType="INTEGER" property="examineType"/>
+        <result column="examine_status" jdbcType="INTEGER" property="examineStatus"/>
+        <result column="reason" jdbcType="VARCHAR" property="reason"/>
+        <result column="examine_user" jdbcType="VARCHAR" property="examineUser"/>
+        <result column="examine_time" jdbcType="DATE" property="examineTime"/>
+        <result column="submit_user" jdbcType="VARCHAR" property="submitUser"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+    <!--    添加审核-->
+    <insert id="addExamine" parameterType="com.liushengpei.pojo.Examine">
+        INSERT INTO examine( id, babyorpeople_id, house_id, examine_type, examine_status, reason, examine_user
+                           , examine_time
+                           , submit_user, create_time, del_flag)
+        VALUES (#{id}, #{babyorpeopleId}, #{houseId}, #{examineType}, #{examineStatus}, #{reason}, #{examineUser},
+                #{examineTime},
+                #{submitUser}, #{createTime}, #{delFlag})
+    </insert>
+
+    <!--    查询所有待审核记录-->
+    <select id="queryAllExamine" resultType="list" resultMap="examine">
+        SELECT *
+        FROM examine
+        WHERE del_flag = 0
+          AND examine_status = 0
+    </select>
+
+    <!--    查询具体的审核信息-->
+    <select id="examine" resultType="com.liushengpei.pojo.Examine" resultMap="examine" parameterType="string">
+        SELECT *
+        FROM examine
+        WHERE id = #{id}
+    </select>
+    <!--    修改审核结果-->
+    <update id="updateExamine" parameterType="map">
+        UPDATE examine
+        SET examine_status=#{status},
+            examine_user=#{examineUser},
+            examine_time=#{time}
+        WHERE del_flag = 0
+          AND id = #{id}
+    </update>
+</mapper>

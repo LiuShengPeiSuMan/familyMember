@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.UserLoginDao">
+    <resultMap id="userlogin" type="com.liushengpei.pojo.UserLogin">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="login_email" jdbcType="VARCHAR" property="loginEmail"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+    <!--    查询数据库有没有族长数据-->
+    <select id="zZNumber" resultType="integer">
+        SELECT COUNT(*)
+        FROM user_login
+        WHERE del_flag = 0
+          AND role = 1
+    </select>
+
+    <!--    初始化族长登录权限-->
+    <insert id="addZzLogin" parameterType="com.liushengpei.pojo.UserLogin">
+        INSERT INTO user_login(id, account, password, login_email, nickname, role, create_time, create_user,
+                               update_time, update_user, del_flag)
+        VALUES (#{id}, #{account}, #{password}, #{loginEmail}, #{nickname}, #{role}, #{createTime}, #{createUser},
+                #{updateTime},
+                #{updateUser}, #{delFlag})
+    </insert>
+
+    <!--    用户登录-->
+    <select id="login" parameterType="map" resultType="com.liushengpei.pojo.UserLogin" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND account = #{account}
+          AND password = #{password}
+    </select>
+
+    <!--    根据邮箱查询登录成员-->
+    <select id="userAsEmail" parameterType="string" resultType="com.liushengpei.pojo.UserLogin" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND login_email = #{email}
+    </select>
+</mapper>

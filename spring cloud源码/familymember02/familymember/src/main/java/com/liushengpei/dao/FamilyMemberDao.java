@@ -1,0 +1,33 @@
+package com.liushengpei.dao;
+
+import com.liushengpei.pojo.FamilyMember;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+/**
+ * 家族成员
+ */
+@Mapper
+public interface FamilyMemberDao {
+
+    /**
+     * 添加家族成员
+     */
+    Integer addFamilyMember(FamilyMember member);
+
+    /**
+     * 查询id
+     */
+    String queryFamilyMemberId(String name);
+
+    /**
+     * 查询家族成员详细信息
+     */
+    FamilyMember queryFamilyMember(String id);
+
+    /**
+     * 查询所有家族成员
+     */
+    List<FamilyMember> familyMemberList();
+}

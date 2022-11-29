@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="toolutil" />
+        <module name="babystration" />
+        <module name="examine" />
+        <module name="familymember" />
+        <module name="family" />
+        <module name="house" />
+        <module name="gateway" />
+        <module name="userlogin" />
+        <module name="homepage" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="feign" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="babystration" options="-parameters" />
+      <module name="examine" options="-parameters" />
+      <module name="family" options="-parameters" />
+      <module name="familymember" options="-parameters" />
+      <module name="familymember02" options="-parameters" />
+      <module name="feign" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="homepage" options="-parameters" />
+      <module name="house" options="-parameters" />
+      <module name="toolutil" options="-parameters" />
+      <module name="userlogin" options="-parameters" />
+    </option>
+  </component>
+</project>

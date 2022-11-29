@@ -1,0 +1,50 @@
+server:
+  port: 5320
+spring:
+  application:
+    name: house-server
+  cloud:
+    nacos:
+      server-addr: 192.168.209.154:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+  datasource:
+    url: jdbc:mysql://192.168.209.154:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.209.154
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲时间
+        min-idle: 0 #最小连接数
+        max-wait: 100 #连接等待时间
+#指定mybatis映射文件路径
+mybatis:
+  #控制台打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
+#seata配置
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.209.154:8848 #nacos地址
+      namespace: bc683702-411f-4d22-8668-9a202045c7c4 #命名空间
+      group: DEFAULT_GROUP  #组
+      application: seata-server
+      username: nacos
+      password: nacos
+  tx-service-group: seata-dome  #事务组
+  service:
+    vgroup-mapping:
+      seata-dome: GS
+  #开启数据源代理的XA模式
+  data-source-proxy-mode: XA

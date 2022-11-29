@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liushengpei.dao.HouseDao">
+    <resultMap id="house" type="com.liushengpei.pojo.HouseSituation">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="family_people_id" jdbcType="VARCHAR" property="familyPeopleId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="house_number" jdbcType="INTEGER" property="houseNumber"/>
+        <result column="people_number" jdbcType="INTEGER" property="peopleNumber"/>
+        <result column="dead_number" jdbcType="INTEGER" property="deadNumber"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+    </resultMap>
+
+    <!--    添加户主-->
+    <insert id="addHouse" parameterType="com.liushengpei.pojo.HouseSituation">
+        INSERT INTO house_situation(id, family_people_id, name, sex, house_number, people_number, dead_number,
+                                    create_time, create_user, update_time, update_user, del_flag)
+        VALUES (#{id}, #{familyPeopleId}, #{name}, #{sex}, #{houseNumber}, #{peopleNumber}, #{deadNumber},
+                #{createTime}, #{createUser}, #{updateTime}, #{updateUser}, #{delFlag})
+    </insert>
+
+    <!--    查询具体户主-->
+    <select id="queryHouse" parameterType="string" resultType="integer">
+        SELECT COUNT(*) AS number
+        FROM house_situation
+        WHERE del_flag = 0
+          AND family_people_id = #{familyPeopleId}
+    </select>
+
+    <!--    查询全部户主-->
+    <select id="queryHoueses" resultType="list" resultMap="house">
+        SELECT *
+        FROM house_situation
+        WHERE del_flag = 0
+    </select>
+
+    <!--    修改户主家庭人口数量-->
+    <update id="updatePeopleNum" parameterType="map">
+        UPDATE house_situation
+        SET people_number=people_number + 1,
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE id = #{id}
+          AND del_flag = 0
+    </update>
+</mapper>

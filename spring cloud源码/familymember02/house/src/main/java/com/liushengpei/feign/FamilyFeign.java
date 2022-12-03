@@ -15,18 +15,18 @@ public interface FamilyFeign {
     /**
      * 添加家庭成员
      */
-    @PostMapping(value = "/family/addFamily")
+    @PostMapping(value = "/foreign/addFamily")
     String addFamily(@RequestBody FamilyBriefIntroduction introduction);
 
     /**
      * 添加家庭成员与户主关系
      */
-    @PostMapping(value = "/family/addPeopleHouse")
+    @PostMapping(value = "/foreign/addPeopleHouse")
     String addPeopleHouse(@RequestBody PeopleHouse house);
 
     /**
      * 查询户主所有家庭成员
      */
-    @PostMapping(value = "/family/queryAllFamily")
+    @PostMapping(value = "/foreign/queryAllFamily")
     List<PeopleHouse> queryAllFamily(@RequestParam(value = "houseId", defaultValue = "", required = false) String houseId);
 }

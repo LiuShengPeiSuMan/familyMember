@@ -23,6 +23,8 @@ public class HouseController {
 
     /**
      * 添加户主
+     *
+     * @param familyVO
      */
     @PostMapping(value = "/addHouse")
     public Result<String> addHouse(@RequestBody FamilyVO familyVO) {
@@ -46,6 +48,8 @@ public class HouseController {
 
     /**
      * 查询户主所有家庭成员
+     *
+     * @param houseId 户主id
      */
     @PostMapping(value = "/queryFamilyAll")
     public Result<List<PeopleHouse>> queryFamilyAll(@RequestParam(value = "houseId", defaultValue = "", required = false) String houseId) {
@@ -58,6 +62,8 @@ public class HouseController {
 
     /**
      * 查询家庭成员详细信息
+     *
+     * @param familyPeopleId 家族成员id
      */
     @PostMapping(value = "/queryFamilyMember")
     public Result<FamilyMember> queryFamilyMember(@RequestParam(value = "familyPeopleId", defaultValue = "", required = false) String familyPeopleId) {

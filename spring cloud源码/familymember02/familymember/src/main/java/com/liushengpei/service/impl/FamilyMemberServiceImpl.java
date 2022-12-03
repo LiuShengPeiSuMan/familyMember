@@ -19,27 +19,6 @@ public class FamilyMemberServiceImpl implements IFamilyMemberService {
     private FamilyMemberDao memberDao;
 
     /**
-     * 添加家族成员
-     */
-    @Override
-    public Integer addFamilyMember(FamilyMember member) {
-        Integer integer = memberDao.addFamilyMember(member);
-        return integer;
-    }
-
-    /**
-     * 查询id
-     */
-    @Override
-    public String queryId(String name) {
-        String familyMemberId = memberDao.queryFamilyMemberId(name);
-        if (familyMemberId == null || familyMemberId.equals("")) {
-            return null;
-        }
-        return familyMemberId;
-    }
-
-    /**
      * 查询家族成员详细信息
      */
     @Override

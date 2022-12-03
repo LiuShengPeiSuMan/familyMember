@@ -49,4 +49,24 @@
         WHERE del_flag = 0
           AND id = #{id}
     </update>
+
+    <!--    查询家族成员id-->
+    <select id="queryFamilyMemberId" parameterType="string" resultType="string">
+        SELECT babyorpeople_id
+        FROM examine
+        WHERE del_flag = 0
+          AND examine_type = 2
+          AND examine_status = 0
+          AND id = #{id}
+    </select>
+
+    <!--    查询有没重复删除-->
+    <select id="countExamine" parameterType="string" resultType="integer">
+        SELECT COUNT(*)
+        FROM examine
+        WHERE del_flag = 0
+          AND examine_type = 2
+          AND examine_status = 0
+          AND babyorpeople_id = #{familyPeopleId}
+    </select>
 </mapper>

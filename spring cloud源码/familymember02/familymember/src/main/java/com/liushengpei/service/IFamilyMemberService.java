@@ -6,15 +6,6 @@ import java.util.List;
 
 public interface IFamilyMemberService {
 
-    /**
-     * 添加家族成员
-     */
-    Integer addFamilyMember(FamilyMember member);
-
-    /**
-     * 查询id
-     */
-    String queryId(String name);
 
     /**
      * 查询家族成员详细信息

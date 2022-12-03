@@ -18,6 +18,8 @@ public class ForeignController {
 
     /**
      * 修改家庭总人口数
+     *
+     * @param params
      */
     @PostMapping(value = "/addFamilyNumber")
     public String addFamilyNumber(@RequestBody Map<String, Object> params) {
@@ -29,5 +31,33 @@ public class ForeignController {
             return "添加失败";
         }
         return "添加成功";
+    }
+
+    /**
+     * 减少家庭人口数
+     *
+     * @param params
+     */
+    @PostMapping(value = "/reduceFamilyNum")
+    public String reduceFamilyNum(@RequestBody Map<String, Object> params) {
+        if (params.isEmpty()) {
+            return "见家庭成员数量参数不能为空";
+        }
+        String msg = foreignService.reduceFamilyNum(params);
+        return msg;
+    }
+
+    /**
+     * 根据家族成员id查询户主id
+     *
+     * @param familyMemberId 家族成员id
+     */
+    @PostMapping(value = "/queryHouseId")
+    public String queryHouseId(@RequestParam(value = "familyMemberId", defaultValue = "", required = false) String familyMemberId) {
+        if (familyMemberId == null || familyMemberId.equals("")) {
+            return "家族成员id不能为空";
+        }
+        String houseId = foreignService.queryHouseId(familyMemberId);
+        return houseId;
     }
 }

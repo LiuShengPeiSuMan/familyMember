@@ -3,18 +3,18 @@ server:
 spring:
   cloud:
     nacos:
-      server-addr: 192.168.209.154:8848
+      server-addr: 192.168.209.159:8848
       discovery:
         namespace: bc683702-411f-4d22-8668-9a202045c7c4
   application:
     name: examine-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.209.154:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.209.159:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
   redis:
-    host: 192.168.209.154
+    host: 192.168.209.159
     port: 6379
     lettuce:
       pool:
@@ -37,7 +37,7 @@ seata:
   registry:
     type: nacos
     nacos:
-      server-addr: 192.168.209.154:8848
+      server-addr: 192.168.209.159:8848
       username: nacos
       password: nacos
       namespace: bc683702-411f-4d22-8668-9a202045c7c4 #命名空间

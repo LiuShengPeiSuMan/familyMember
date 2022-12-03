@@ -28,4 +28,14 @@ public interface HouseDao {
      * 添加户主人口数量
      */
     Integer updatePeopleNum(Map<String, Object> params);
+
+    /**
+     * 减少家庭人口数
+     */
+    Integer reduceFamilyNum(Map<String, Object> params);
+
+    /**
+     * 查询户主id
+     */
+    String queryHouseId(String familyPeopleId);
 }

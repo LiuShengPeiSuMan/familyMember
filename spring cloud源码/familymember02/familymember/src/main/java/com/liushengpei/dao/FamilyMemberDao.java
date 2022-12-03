@@ -4,6 +4,7 @@ import com.liushengpei.pojo.FamilyMember;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 家族成员
@@ -30,4 +31,14 @@ public interface FamilyMemberDao {
      * 查询所有家族成员
      */
     List<FamilyMember> familyMemberList();
+
+    /**
+     * 修改家庭成员信息
+     */
+    Integer updateFamilyMember(Map<String, Object> params);
+
+    /**
+     * 修改家族成员删除标记
+     */
+    Integer delFamilyMember(Map<String, Object> params);
 }

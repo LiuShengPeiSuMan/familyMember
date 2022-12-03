@@ -17,6 +17,9 @@ public class NoticeController {
 
     /**
      * 添加通知
+     *
+     * @param type 通知类型
+     * @param text 通知内容
      */
     @PostMapping(value = "/addNotice")
     public Result<String> addNotice(@RequestParam(value = "type", defaultValue = "", required = false) Integer type,

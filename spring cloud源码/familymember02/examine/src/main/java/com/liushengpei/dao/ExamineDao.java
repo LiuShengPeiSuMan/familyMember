@@ -28,4 +28,14 @@ public interface ExamineDao {
      * 修改审核状态
      */
     Integer updateExamine(Map<String, Object> params);
+
+    /**
+     * 查询户主id
+     */
+    String queryFamilyMemberId(String id);
+
+    /**
+     * 查询有没有重复
+     * */
+    Integer countExamine(String familyPeopleId);
 }

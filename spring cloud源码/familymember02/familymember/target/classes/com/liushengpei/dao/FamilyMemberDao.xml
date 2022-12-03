@@ -76,4 +76,48 @@
         WHERE del_flag = 0
     </select>
 
+    <!--    修改家族成员信息-->
+    <update id="updateFamilyMember" parameterType="map">
+        UPDATE family_member
+        <set>
+            <if test="homeAddress!=null and homeAddress!=''">
+                home_address=#{homeAddress},
+            </if>
+            <if test="marriedOfNot!=null and marriedOfNot!=''">
+                married_of_not=#{marriedOfNot},
+            </if>
+            <if test="education!=null and education!=''">
+                education=#{education},
+            </if>
+            <if test="work!=null and work!=''">
+                work=#{work},
+            </if>
+            <if test="workAddress!=null and workAddress!=''">
+                work_address=#{workAddress},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                update_user=#{updateUser},
+            </if>
+        </set>
+        WHERE del_flag=0 AND id=#{id}
+    </update>
+
+    <!--    修改家族成员删除标记-->
+    <update id="delFamilyMember" parameterType="map">
+        UPDATE family_member
+        SET del_flag=1,
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

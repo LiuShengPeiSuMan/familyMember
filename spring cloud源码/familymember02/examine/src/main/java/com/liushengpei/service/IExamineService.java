@@ -18,7 +18,7 @@ public interface IExamineService {
     /**
      * 查询提交的审核详细信息
      */
-    FamilyVO queryExamine(String id, Integer type);
+    Object queryExamine(String id, Integer type);
 
     /**
      * 通过或驳回

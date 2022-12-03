@@ -23,4 +23,13 @@ public class ForeignServiceImpl implements IForeignService {
         Integer integer = examineDao.addExamine(examine);
         return integer;
     }
+
+    /**
+     * 判断删除家族成员有没有重复删除同一个人
+     */
+    @Override
+    public Integer countPeopleExamine(String familyPeopleId) {
+        Integer count = examineDao.countExamine(familyPeopleId);
+        return count;
+    }
 }

@@ -34,4 +34,57 @@
         WHERE del_flag = 0
           AND name = #{name}
     </select>
+
+    <!--    修改家庭成员简介-->
+    <update id="updateFamily" parameterType="map">
+        UPDATE family_brief_introduction
+        <set>
+            <if test="isMarry!=null and isMarry!=''">
+                isMarry=#{isMarry},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                update_user=#{updateUser}
+            </if>
+        </set>
+        WHERE del_flag=0 AND family_people_id = #{familyPeopleId}
+    </update>
+
+    <!--    根据户主姓名查询户主id-->
+    <select id="queryHouseIdByName" parameterType="string" resultType="string">
+        SELECT house_id
+        FROM family_brief_introduction
+        WHERE del_flag = 0
+          AND name = #{name}
+    </select>
+
+    <!--    查询该户主下的所有家庭成员-->
+    <select id="familyList" parameterType="string" resultType="list" resultMap="familybriefintroduction">
+        SELECT *
+        FROM family_brief_introduction
+        WHERE del_flag = 0
+          AND house_id = #{houseId}
+    </select>
+
+    <!--    根据家族成员id查询户主id-->
+    <select id="houseId" parameterType="string" resultType="string">
+        SELECT house_id
+        FROM family_brief_introduction
+        WHERE del_flag = 0
+          AND family_people_id = #{familyPeopleId}
+    </select>
+
+    <!--    删除家庭成员简介-->
+    <update id="delIntroduction" parameterType="map">
+        UPDATE family_brief_introduction
+        SET del_flag=1,
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE family_people_id = #{familyPeopleId}
+    </update>
 </mapper>

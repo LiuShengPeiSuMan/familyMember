@@ -1,0 +1,49 @@
+server:
+  port: 5322
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.209.159:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+  application:
+    name: baby-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.209.159:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.209.159
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲时间
+        min-idle: 0 #最小连接数
+        max-wait: 100 #连接等待时间
+#控制台打印mybatis日志
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#feign配置
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
+#seata配置
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.209.159:8848
+      namespace: bc683702-411f-4d22-8668-9a202045c7c4
+      username: nacos
+      password: nacos
+      group: DEFAULT_GROUP  #组
+      application: seata-server
+  tx-service-group: seata-dome
+  service:
+    vgroup-mapping:
+      seata-dome: GS
+  data-source-proxy-mode: XA

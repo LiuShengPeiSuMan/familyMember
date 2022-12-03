@@ -15,4 +15,10 @@ public interface HouseFeign {
      */
     @PostMapping(value = "/foreign/addFamilyNumber")
     String addFamilyNumber(@RequestBody Map<String,Object> params);
+
+    /**
+     * 减少家庭人口数
+     */
+    @PostMapping(value = "/foreign/reduceFamilyNum")
+    String reduceFamilyNum(@RequestBody Map<String, Object> params);
 }

@@ -30,22 +30,30 @@ public class ExamineController {
 
     /**
      * 审核的详细信息
+     *
+     * @param peopleFamilyId 家族成员id
+     * @param type           审核类型（0：添加出生成员，1：添加家庭成员，2：删除家庭成员）
      */
     @PostMapping(value = "/queryExamineDetailed")
-    public Result<FamilyVO> queryExamineDetailed(@RequestParam(value = "peopleFamilyId", defaultValue = "", required = false) String peopleFamilyId,
-                                                 @RequestParam(value = "type", defaultValue = "", required = false) Integer type) {
+    public Result<Object> queryExamineDetailed(@RequestParam(value = "peopleFamilyId", defaultValue = "", required = false) String peopleFamilyId,
+                                               @RequestParam(value = "type", defaultValue = "", required = false) Integer type) {
         if (peopleFamilyId == null || peopleFamilyId.equals("")) {
             return Result.fail("家族成员id不能为空");
         }
         if (type == null) {
             return Result.fail("审核类型不能为空");
         }
-        FamilyVO familyVO = examineService.queryExamine(peopleFamilyId, type);
+        Object familyVO = examineService.queryExamine(peopleFamilyId, type);
         return Result.success(familyVO);
     }
 
     /**
      * 审核通过或驳回
+     *
+     * @param id          审核id
+     * @param type        审核类型
+     * @param status      审核状态
+     * @param examineUser 审核人（登录人）
      */
     @PostMapping(value = "/examineAdoptAndReject")
     public Result<String> examineAdoptAndReject(@RequestParam(value = "id", defaultValue = "", required = false) String id,

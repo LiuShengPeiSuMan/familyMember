@@ -3,6 +3,7 @@ package com.liushengpei.service.serviceimpl;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liushengpei.dao.ExamineDao;
+import com.liushengpei.feign.BabyFeign;
 import com.liushengpei.feign.FamilyFeign;
 import com.liushengpei.feign.FamilyMemberFeign;
 import com.liushengpei.feign.HouseFeign;
@@ -13,15 +14,11 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import util.domain.FamilyBriefIntroduction;
-import util.domain.FamilyMember;
-import util.domain.FamilyVO;
-import util.domain.PeopleHouse;
+import util.domain.*;
 
 import java.util.*;
 
-import static util.constant.ConstantToolUtil.ADD_FAMILY;
-import static util.constant.ConstantToolUtil.CHECK_FAMILY;
+import static util.constant.ConstantToolUtil.*;
 
 /**
  * 待审核
@@ -38,6 +35,8 @@ public class ExamineServiceImpl implements IExamineService {
     @Autowired
     private HouseFeign houseFeign;
     @Autowired
+    private BabyFeign babyFeign;
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -52,41 +51,67 @@ public class ExamineServiceImpl implements IExamineService {
 
     /**
      * 查询审核记录的详细信息
+     *
+     * @param id   家族成员id或出生成员id->（babyOrPeopleId）
+     * @param type 审核类型
      */
     @Override
-    public FamilyVO queryExamine(String id, Integer type) {
-        FamilyVO familyVO = null;
+    public Object queryExamine(String id, Integer type) {
         //判断审核类型
         if (type == 0) {   //添加新生儿
-
+            //查询出生成员信息
+            //BabySituation babySituation = babyFeign.queryBaby(id);
+            String baby = (String) redisTemplate.opsForValue().get(ADD_BABY + id);
+            BabySituation babySituation = JSONObject.parseObject(baby, BabySituation.class);
+            return babySituation;
         } else if (type == 1) { //添加家庭成员
             //查询缓存
             String familyvo = (String) redisTemplate.opsForValue().get(ADD_FAMILY + id);
             //序列化成对象
-            familyVO = JSONObject.parseObject(familyvo, FamilyVO.class);
+            FamilyVO familyVO = JSONObject.parseObject(familyvo, FamilyVO.class);
             System.err.println("======familyvo=======" + familyvo);
+            return familyVO;
         } else if (type == 2) { //删除家庭成员
-
+            //查询要删除的家庭成员信息
+            FamilyMember member = memberFeign.queryInformation(id);
+            return member;
         }
-        return familyVO;
+        return null;
     }
 
     /**
      * 通过或驳回
+     *
+     * @param id          审核id
+     * @param type        审核类型（0，添加出生成员，1，添加家庭成员，2，删除家庭成员）
+     * @param status      审核状态（0，待审核，1，审核通过，2，审核驳回）
+     * @param examineUser 审核人 （登录人姓名，loginName）
      */
     @GlobalTransactional
     @Override
     public String adoptAndReject(String id, Integer type, Integer status, String examineUser) {
         //查询审核信息
         Examine examine = examineDao.examine(id);
-        String e = (String) redisTemplate.opsForValue().get(ADD_FAMILY + examine.getBabyorpeopleId());
-        //序列化对象
-        FamilyVO familyVO = JSONObject.parseObject(e, FamilyVO.class);
         String message = "";
         if (status == 1) {  //审核通过
             if (type == 0) {   //添加新生儿
+                //查询出生成员缓存
+                String baby = (String) redisTemplate.opsForValue().get(ADD_BABY + examine.getBabyorpeopleId());
+                BabySituation babySituation = JSONObject.parseObject(baby, BabySituation.class);
+                if (babySituation != null) {
+                    //添加出生成员
+                    babyFeign.addBabySitatus(babySituation);
+                    //删除缓存数据
+                    redisTemplate.delete(ADD_BABY + babySituation.getId());
+                    redisTemplate.delete(CHECK_BABY + babySituation.getName());
+                }
+                //修改审核结果
+                updateExamine(examine.getId(), 1, examineUser);
                 message = "审核已通过";
             } else if (type == 1) { //添加家族成员
+                String e = (String) redisTemplate.opsForValue().get(ADD_FAMILY + examine.getBabyorpeopleId());
+                //序列化对象
+                FamilyVO familyVO = JSONObject.parseObject(e, FamilyVO.class);
                 //添加家族成员
                 FamilyMember member = new FamilyMember();
                 member.setId(familyVO.getFamilyMemberId());
@@ -150,12 +175,49 @@ public class ExamineServiceImpl implements IExamineService {
                 redisTemplate.delete(CHECK_FAMILY + familyVO.getName());
                 message = "审核已通过";
             } else if (type == 2) { //删除家庭成员
+                //查询家族成员id
+                String familyMemberId = examineDao.queryFamilyMemberId(id);
+                //查询户主id
+                String houseId = familyFeign.houseId(familyMemberId);
+                //删除家族成员
+                Map<String, Object> delFamilyMember = new HashMap<>();
+                delFamilyMember.put("id", familyMemberId);
+                delFamilyMember.put("updateUser", examineUser);
+                memberFeign.delFamilyMember(delFamilyMember);
+                //删除家庭成员简介
+                Map<String, Object> delFamily = new HashMap<>();
+                delFamily.put("familyPeopleId", familyMemberId);
+                delFamily.put("updateUser", examineUser);
+                familyFeign.delIntroduction(delFamily);
+                //删除家族成员与户主关系
+                Map<String, Object> delPeopleHouse = new HashMap<>();
+                delPeopleHouse.put("familyPeopleId", familyMemberId);
+                delPeopleHouse.put("updateUser", examineUser);
+                familyFeign.delPeopleHouse(delPeopleHouse);
+                //修改户主家庭人口数（-1）
+                Map<String, Object> reduce = new HashMap<>();
+                reduce.put("id", houseId);
+                reduce.put("updateUser", examineUser);
+                houseFeign.reduceFamilyNum(reduce);
+                //修改审核结果
+                updateExamine(id, 1, examineUser);
                 message = "审核已通过";
             }
         } else { //审核驳回
             if (type == 0) {   //添加新生儿
+                //查询出生成员缓存
+                String baby = (String) redisTemplate.opsForValue().get(ADD_BABY + examine.getBabyorpeopleId());
+                BabySituation babySituation = JSONObject.parseObject(baby, BabySituation.class);
+                //删除缓存
+                redisTemplate.delete(ADD_BABY + examine.getBabyorpeopleId());
+                redisTemplate.delete(CHECK_BABY + babySituation.getName());
+                //修改审核结果
+                updateExamine(examine.getId(), 2, examineUser);
                 message = "审核已被驳回";
             } else if (type == 1) { //添加家族成员
+                String e = (String) redisTemplate.opsForValue().get(ADD_FAMILY + examine.getBabyorpeopleId());
+                //序列化对象
+                FamilyVO familyVO = JSONObject.parseObject(e, FamilyVO.class);
                 //修改审核结果
                 updateExamine(id, 2, examineUser);
                 //删缓存数据
@@ -163,6 +225,8 @@ public class ExamineServiceImpl implements IExamineService {
                 redisTemplate.delete(CHECK_FAMILY + familyVO.getName());
                 message = "审核已被驳回";
             } else if (type == 2) { //删除家庭成员
+                //修改审核记录
+                updateExamine(id, 2, examineUser);
                 message = "审核已被驳回";
             }
         }
@@ -171,6 +235,10 @@ public class ExamineServiceImpl implements IExamineService {
 
     /**
      * 修改审核结果
+     *
+     * @param id          审核id
+     * @param status      审核状态
+     * @param examineUser 审核人，登录人
      */
     private void updateExamine(String id, Integer status, String examineUser) {
         Map<String, Object> params = new HashMap<>();

@@ -28,6 +28,11 @@ public class LoginController {
 
     /**
      * 初始化族长登录权限
+     *
+     * @param name       姓名
+     * @param account    登录账号
+     * @param password   登录密码
+     * @param loginEmail 登录邮箱
      */
     @PostMapping(value = "/initZzLogin")
     public Result<String> initZzLogin(@RequestParam(value = "name", defaultValue = "", required = false) String name,
@@ -49,6 +54,9 @@ public class LoginController {
 
     /**
      * 成员登录
+     *
+     * @param account  登录账号
+     * @param password 登录密码
      */
     @PostMapping(value = "/login")
     public Result<UserLogin> login(@RequestParam(value = "account", defaultValue = "", required = false) String account,

@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liushengpei.dao.FamilyBriefIntroductionDao;
 import com.liushengpei.dao.PeopleHouseDao;
 import com.liushengpei.feign.ExamineFeign;
+import com.liushengpei.feign.FamilyMemberFeign;
 import com.liushengpei.pojo.FamilyBriefIntroduction;
 import com.liushengpei.pojo.PeopleHouse;
+import com.liushengpei.pojo.UpdateFamilyDetailed;
 import com.liushengpei.service.IFamilyService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -15,9 +18,7 @@ import util.domain.Examine;
 import util.domain.FamilyMember;
 import util.domain.FamilyVO;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static util.constant.ConstantToolUtil.*;
 
@@ -33,44 +34,12 @@ public class FamilyServiceImpl implements IFamilyService {
     private PeopleHouseDao houseDao;
     @Autowired
     private ExamineFeign examineFeign;
+    @Autowired
+    private FamilyMemberFeign memberFeign;
     //缓存
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     private static final ObjectMapper mapper = new ObjectMapper();
-
-    /**
-     * 添加家庭成员
-     */
-    @Override
-    public String addFamily(FamilyBriefIntroduction introduction) {
-        Integer integer = introductionDao.addFamily(introduction);
-        if (integer > 0) {
-            return "添加成功";
-        }
-        return "添加失败";
-    }
-
-
-    /**
-     * 添加家族成员与户主关系
-     */
-    @Override
-    public String addPeopleHouse(PeopleHouse house) {
-        Integer integer = houseDao.addPeopleHouse(house);
-        if (integer > 0) {
-            return "添加成功";
-        }
-        return "添加失败";
-    }
-
-    /**
-     * 查询户主所有家庭成员
-     */
-    @Override
-    public List<PeopleHouse> queryFamilyAll(String houseId) {
-        List<PeopleHouse> peopleHouses = houseDao.queryFamilyAll(houseId);
-        return peopleHouses;
-    }
 
     /**
      * 添加家庭成员
@@ -140,12 +109,83 @@ public class FamilyServiceImpl implements IFamilyService {
     }
 
     /**
+     * 查询全部家庭成员
+     */
+    @Override
+    public List<FamilyBriefIntroduction> allFamily(String loginName) {
+        //根据登录人姓名查询户主id
+        String houseId = introductionDao.queryHouseIdByName(loginName);
+        //查询所有该户主下的家庭成员
+        List<FamilyBriefIntroduction> introductions = introductionDao.familyList(houseId);
+        return introductions;
+    }
+
+    /**
+     * 查询家庭成员详细信息
+     */
+    @Override
+    public FamilyMember familyDetailed(String familyPeopleId) {
+        FamilyMember member = memberFeign.queryInformation(familyPeopleId);
+        return member;
+    }
+
+    /**
      * 修改家庭成员基本信息
      */
     @Override
-    public String updateFamily(FamilyMember member) {
+    @GlobalTransactional
+    public String updateFamily(UpdateFamilyDetailed detailed) {
+        //修改家庭成员信息简介
+        Map<String, Object> params = new HashMap<>();
+        params.put("familyPeopleId", detailed.getFamilyPeopleId());
+        params.put("isMarry", detailed.getIsMarry());
+        params.put("phone", detailed.getPhone());
+        params.put("updateTime", new Date());
+        params.put("updateUser", detailed.getLoginName());
+        introductionDao.updateFamily(params);
+        //修改家族成员信息
+        Map<String, Object> params02 = new HashMap<>();
+        params02.put("homeAddress", detailed.getHomeAddress());
+        params02.put("marriedOfNot", detailed.getIsMarry());
+        params02.put("education", detailed.getEducation());
+        params02.put("work", detailed.getWork());
+        params02.put("workAddress", detailed.getWorkAddress());
+        params02.put("phone", detailed.getPhone());
+        params02.put("email", detailed.getEmail());
+        params02.put("updateTime", new Date());
+        params02.put("updateUser", detailed.getLoginName());
+        params02.put("id", detailed.getFamilyPeopleId());
+        memberFeign.updateFamilyMember(params02);
+        return "修改成功";
+    }
 
-
-        return null;
+    /**
+     * 删除家庭成员
+     */
+    @Override
+    public String deleteFamily(String familyPeopleId, String loginName, String reason) {
+        //判断有没有重复提交删除
+        Integer count = examineFeign.countPeopleExamine(familyPeopleId);
+        if (count > 0) {
+            return "此成员已删除，族长审核中！";
+        }
+        //查询户主id
+        String houseId = introductionDao.houseId(familyPeopleId);
+        //添加一条审核记录
+        Examine examine = new Examine();
+        examine.setId(UUID.randomUUID().toString().substring(0, 32));
+        examine.setBabyorpeopleId(familyPeopleId);
+        examine.setHouseId(houseId);
+        //审核类型删除家庭成员
+        examine.setExamineType(2);
+        examine.setExamineStatus(0);
+        examine.setReason(reason);
+        examine.setExamineUser(null);
+        examine.setExamineTime(null);
+        examine.setSubmitUser(loginName);
+        examine.setCreateTime(new Date());
+        examine.setDelFlag(0);
+        examineFeign.addExamine(examine);
+        return "删除成功，待族长审核";
     }
 }

@@ -21,6 +21,8 @@ public class EmailLoginController {
 
     /**
      * 获取邮箱验证码
+     *
+     * @param email 电子邮箱号
      */
     @PostMapping(value = "/getCode")
     public Result<String> getCode(@RequestParam(value = "email", defaultValue = "", required = false) String email) {
@@ -33,6 +35,9 @@ public class EmailLoginController {
 
     /**
      * 邮箱登录
+     *
+     * @param email 邮箱
+     * @param code  验证码
      */
     @PostMapping(value = "/login")
     public Result<UserLogin> login(@RequestParam(value = "email", defaultValue = "", required = false) String email,

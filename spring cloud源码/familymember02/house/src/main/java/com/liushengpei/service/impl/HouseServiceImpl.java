@@ -3,6 +3,7 @@ package com.liushengpei.service.impl;
 import com.liushengpei.dao.HouseDao;
 import com.liushengpei.feign.FamilyFeign;
 import com.liushengpei.feign.FamilyMemberFeign;
+import com.liushengpei.feign.UserLoginFeign;
 import com.liushengpei.pojo.FamilyBriefIntroduction;
 import com.liushengpei.pojo.FamilyMember;
 import com.liushengpei.pojo.HouseSituation;
@@ -11,11 +12,16 @@ import com.liushengpei.service.IHouseService;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.domain.Examine;
 import util.domain.FamilyVO;
+import util.domain.UserLogin;
+import util.tool.Util;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static util.constant.ConstantToolUtil.PUTONG;
 
 /**
  * 户主管理
@@ -29,6 +35,8 @@ public class HouseServiceImpl implements IHouseService {
     private FamilyFeign familyFeign;
     @Autowired
     private FamilyMemberFeign memberFeign;
+    @Autowired
+    private UserLoginFeign loginFeign;
 
     /**
      * 添加户主
@@ -113,6 +121,22 @@ public class HouseServiceImpl implements IHouseService {
         member.setUpdateUser(familyVO.getLoginName());
         member.setDelFlag(0);
         memberFeign.addFamilyMember(member);
+        //添加登录权限
+        UserLogin login = new UserLogin();
+        login.setId(UUID.randomUUID().toString().substring(0, 32));
+        //汉字转拼音
+        String account = Util.toPinYin(familyVO.getName());
+        login.setAccount("huzhu" + account);
+        login.setPassword(UUID.randomUUID().toString().substring(0, 8));
+        login.setLoginEmail(familyVO.getEmail());
+        login.setNickname(familyVO.getName());
+        login.setRole(2);
+        login.setCreateTime(new Date());
+        login.setCreateUser(familyVO.getLoginName());
+        login.setUpdateTime(new Date());
+        login.setUpdateUser(familyVO.getLoginName());
+        login.setDelFlag(0);
+        loginFeign.addLogin(login);
         return "添加成功";
     }
 

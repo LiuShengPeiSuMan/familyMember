@@ -6,6 +6,7 @@ import com.liushengpei.service.IForeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -86,5 +87,14 @@ public class ForeignController {
         }
         String msg = foreignService.delFamilyMember(params);
         return msg;
+    }
+
+    /**
+     * 查询所有家族成员
+     */
+    @PostMapping(value = "/allFamilyMember")
+    public List<FamilyMember> allFamilyMember() {
+        List<FamilyMember> list = foreignService.familyMemberAll();
+        return list;
     }
 }

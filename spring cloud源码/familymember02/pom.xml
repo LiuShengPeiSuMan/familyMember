@@ -18,6 +18,7 @@
         <module>house</module>
         <module>familymember</module>
         <module>babystration</module>
+        <module>jurisdiction</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

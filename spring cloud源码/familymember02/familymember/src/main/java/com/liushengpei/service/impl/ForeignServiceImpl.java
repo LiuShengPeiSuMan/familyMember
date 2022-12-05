@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,11 +68,20 @@ public class ForeignServiceImpl implements IForeignService {
      */
     @Override
     public String delFamilyMember(Map<String, Object> params) {
-        params.put("updateTime",new Date());
+        params.put("updateTime", new Date());
         Integer num = memberDao.delFamilyMember(params);
         if (num > 0) {
             return "删除成功";
         }
         return "删除失败";
+    }
+
+    /**
+     * 查询所有家族成员
+     */
+    @Override
+    public List<FamilyMember> familyMemberAll() {
+        List<FamilyMember> familyMemberList = memberDao.familyMemberList();
+        return familyMemberList;
     }
 }

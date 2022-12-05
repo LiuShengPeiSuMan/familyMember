@@ -10,6 +10,7 @@
         <module name="babystration" />
         <module name="examine" />
         <module name="familymember" />
+        <module name="jurisdiction" />
         <module name="family" />
         <module name="house" />
         <module name="gateway" />
@@ -32,6 +33,7 @@
       <module name="gateway" options="-parameters" />
       <module name="homepage" options="-parameters" />
       <module name="house" options="-parameters" />
+      <module name="jurisdiction" options="-parameters" />
       <module name="toolutil" options="-parameters" />
       <module name="userlogin" options="-parameters" />
     </option>

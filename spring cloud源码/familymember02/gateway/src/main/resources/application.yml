@@ -5,7 +5,7 @@ spring:
     name: gateway
   cloud:
     nacos:
-      server-addr: 192.168.209.159:8848
+      server-addr: 192.168.209.160:8848
       discovery:
         namespace: bc683702-411f-4d22-8668-9a202045c7c4
     gateway:

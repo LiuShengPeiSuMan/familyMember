@@ -49,4 +49,38 @@
         WHERE del_flag = 0
           AND login_email = #{email}
     </select>
+
+    <!--    查询已有登录权限的用户-->
+    <select id="queryLoginList" resultType="list" resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+    </select>
+
+    <!--    修改登录密码-->
+    <update id="updatePassword" parameterType="map">
+        UPDATE user_login
+        SET password=#{password},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE del_flag = 0
+          AND id = #{id}
+    </update>
+
+    <!--    解除用户登录权限-->
+    <update id="relievePassword" parameterType="map">
+        UPDATE user_login
+        SET del_flag=1,
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        WHERE id = #{id}
+    </update>
+
+    <!--    查询登录邮箱个数-->
+    <select id="queryEmailCount" parameterType="string" resultType="integer">
+        SELECT COUNT(*)
+        FROM user_login
+        WHERE del_flag = 0
+          AND login_email = #{loginEmail}
+    </select>
 </mapper>

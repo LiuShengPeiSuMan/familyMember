@@ -2,6 +2,7 @@ package com.liushengpei.service;
 
 import com.liushengpei.pojo.FamilyMember;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,4 +34,9 @@ public interface IForeignService {
      * 删除家族成员
      */
     String delFamilyMember(Map<String, Object> params);
+
+    /**
+     * 查询所有家族成员
+     */
+    List<FamilyMember> familyMemberAll();
 }

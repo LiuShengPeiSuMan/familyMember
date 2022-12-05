@@ -25,4 +25,6 @@ public class ConstantToolUtil {
     public static final String ADD_BABY = "add:baby:";
     //新生儿添加姓名
     public static final String CHECK_BABY = "check:baby:";
+    //添加登录权限普通成员
+    public static final String PUTONG="putong";
 }

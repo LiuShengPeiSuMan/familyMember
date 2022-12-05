@@ -1,0 +1,22 @@
+server:
+  port: 5326
+spring:
+  application:
+    name: jurisdiction-service
+  cloud:
+    nacos:
+      server-addr: 192.168.209.160:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.209.160:3306/docker?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

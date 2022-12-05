@@ -3,6 +3,8 @@ package com.liushengpei.dao;
 import com.liushengpei.pojo.UserLogin;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -27,4 +29,24 @@ public interface UserLoginDao {
      * 根据邮箱查询登录成员
      */
     UserLogin userAsEmail(String email);
+
+    /**
+     * 查询登录用户
+     */
+    List<UserLogin> queryLoginList();
+
+    /**
+     * 修改登录密码
+     */
+    Integer updatePassword(Map<String, Object> params);
+
+    /**
+     * 解除用户登录权限
+     */
+    Integer relievePassword(Map<String, Object> params);
+
+    /**
+     * 查询登录邮箱个数
+     */
+    Integer queryEmailCount(String loginEmail);
 }

@@ -6,7 +6,7 @@ package com.example.familymembermanagement.util;
  */
 public class UrlApiUtil {
 
-    private static String ip = "192.168.1.4";
+    private static String ip = "192.168.1.6";
     private static String port = "4314";
 
     /**

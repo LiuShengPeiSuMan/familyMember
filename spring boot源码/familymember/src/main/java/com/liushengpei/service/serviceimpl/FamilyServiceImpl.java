@@ -270,4 +270,6 @@ public class FamilyServiceImpl implements IFamilyService {
         String queryHouseIdByName = peopleHouseDao.queryHouseIdByName(name);
         return queryHouseIdByName;
     }
+
+
 }

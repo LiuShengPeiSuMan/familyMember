@@ -67,8 +67,16 @@
     <select id="peopleBirthday" resultType="list" resultMap="FamilyMember">
         SELECT *
         FROM family_member
-        WHERE DATEDIFF(date_of_birth, NOW()) &lt; 7
-          AND DATEDIFF(date_of_birth, NOW()) &gt;= 0
+        WHERE del_flag = 0
+          AND MID(date_of_birth, 6, 5)
+            IN (
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) + 1 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) + 0 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 1 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 2 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 3 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 4 DAY ), 6, 5),
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 5 DAY ), 6, 5));
         ORDER BY date_of_birth ASC
     </select>
 

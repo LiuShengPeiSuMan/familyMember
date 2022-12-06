@@ -19,6 +19,7 @@
         <module>familymember</module>
         <module>babystration</module>
         <module>jurisdiction</module>
+        <module>datastatistics</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -97,4 +97,13 @@ public class ForeignController {
         List<FamilyMember> list = foreignService.familyMemberAll();
         return list;
     }
+
+    /**
+     * 查询一周之内过生日的成员
+     */
+    @PostMapping(value = "/queryDateOfBirth")
+    public List<FamilyMember> queryDateOfBirth() {
+        List<FamilyMember> list = foreignService.queryDateOfBirth();
+        return list;
+    }
 }

@@ -39,4 +39,9 @@ public interface IForeignService {
      * 查询所有家族成员
      */
     List<FamilyMember> familyMemberAll();
+
+    /**
+     * 查询一周之内过生日的人
+     */
+    List<FamilyMember> queryDateOfBirth();
 }

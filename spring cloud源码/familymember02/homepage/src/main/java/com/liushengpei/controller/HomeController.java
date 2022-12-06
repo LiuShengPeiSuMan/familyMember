@@ -24,6 +24,7 @@ public class HomeController {
      */
     @PostMapping(value = "/queryHomeData")
     public Result<Map<String, Object>> queryHomeData() {
-        return Result.success();
+        Map<String, Object> map = service.queryData();
+        return Result.success(map);
     }
 }

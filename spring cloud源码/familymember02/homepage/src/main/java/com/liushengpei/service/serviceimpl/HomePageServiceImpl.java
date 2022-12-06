@@ -1,14 +1,14 @@
 package com.liushengpei.service.serviceimpl;
 
 import com.liushengpei.dao.NoticeDao;
+import com.liushengpei.feign.FamilyMemberFeign;
 import com.liushengpei.pojo.Notice;
 import com.liushengpei.service.IHomePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.domain.FamilyMember;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 首页
@@ -18,6 +18,8 @@ public class HomePageServiceImpl implements IHomePageService {
 
     @Autowired
     private NoticeDao noticeDao;
+    @Autowired
+    private FamilyMemberFeign memberFeign;
 
     /**
      * 添加通知
@@ -43,6 +45,21 @@ public class HomePageServiceImpl implements IHomePageService {
      */
     @Override
     public Map<String, Object> queryData() {
-        return null;
+        Map<String, Object> map = new HashMap<>();
+        //审核数据
+        List<Notice> notices = noticeDao.queryNoticeToday();
+        if (notices.isEmpty()) {
+            map.put("notice", null);
+        } else {
+            map.put("notice", notices);
+        }
+        //家族成员生日
+        List<FamilyMember> dateOfBirth = memberFeign.queryDateOfBirth();
+        if (dateOfBirth.isEmpty()) {
+            map.put("dateofbirth", null);
+        } else {
+            map.put("dateofbirth", dateOfBirth);
+        }
+        return map;
     }
 }

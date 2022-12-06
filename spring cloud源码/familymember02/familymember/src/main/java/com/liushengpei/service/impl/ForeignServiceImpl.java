@@ -84,4 +84,13 @@ public class ForeignServiceImpl implements IForeignService {
         List<FamilyMember> familyMemberList = memberDao.familyMemberList();
         return familyMemberList;
     }
+
+    /**
+     * 查询一周只能过生日的成员
+     */
+    @Override
+    public List<FamilyMember> queryDateOfBirth() {
+        List<FamilyMember> familyMemberList = memberDao.queryDateOfBirth();
+        return familyMemberList;
+    }
 }

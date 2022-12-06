@@ -9,6 +9,7 @@
         <module name="toolutil" />
         <module name="babystration" />
         <module name="examine" />
+        <module name="datastatistics" />
         <module name="familymember" />
         <module name="jurisdiction" />
         <module name="family" />
@@ -25,6 +26,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="babystration" options="-parameters" />
+      <module name="datastatistics" options="-parameters" />
       <module name="examine" options="-parameters" />
       <module name="family" options="-parameters" />
       <module name="familymember" options="-parameters" />

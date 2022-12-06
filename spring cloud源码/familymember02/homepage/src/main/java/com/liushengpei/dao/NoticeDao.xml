@@ -16,4 +16,12 @@
         INSERT INTO notice(id, notice_type, notice_content, notice_time, del_flag)
         VALUES (#{id}, #{noticeType}, #{noticeContent}, #{noticeTime}, #{delFlag})
     </insert>
+
+    <!--    查询当天通知-->
+    <select id="queryNoticeToday" resultType="list" resultMap="notice">
+        SELECT *
+        FROM notice
+        WHERE del_flag = 0
+          AND TO_DAYS(create_time) = TO_DAYS(NOW())
+    </select>
 </mapper>

@@ -54,6 +54,11 @@ public class HouseServiceImpl implements IHouseService {
                 return "此户主已经添加，请重新添加！";
             }
         }
+        //判断添加的邮箱有没有重复
+        Integer count = loginFeign.emailCount(familyVO.getEmail());
+        if (count > 0) {
+            return "此电子邮箱已存在，请重新添加或略过！";
+        }
         String houseId = UUID.randomUUID().toString().substring(0, 32);
         String familyPeopleId = UUID.randomUUID().toString().substring(0, 32);
         //添加户主

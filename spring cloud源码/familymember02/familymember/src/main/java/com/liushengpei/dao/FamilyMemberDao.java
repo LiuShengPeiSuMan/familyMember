@@ -41,4 +41,9 @@ public interface FamilyMemberDao {
      * 修改家族成员删除标记
      */
     Integer delFamilyMember(Map<String, Object> params);
+
+    /**
+     * 查询一周之内过生日的人
+     */
+    List<FamilyMember> queryDateOfBirth();
 }

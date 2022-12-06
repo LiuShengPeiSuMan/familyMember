@@ -1,0 +1,15 @@
+server:
+  port: 5328
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.209.161:8848
+      discovery:
+        namespace: bc683702-411f-4d22-8668-9a202045c7c4
+  application:
+    name: data-statistics
+#feign配置
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

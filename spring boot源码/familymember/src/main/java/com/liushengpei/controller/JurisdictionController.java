@@ -102,10 +102,10 @@ public class JurisdictionController {
     }
 
     /**
-     * 查询所有家族成员
+     * 查询所有没有登录权限的家族成员
      */
-    @PostMapping(value = "/selectNameEmail")
-    public Result<List<Jurisdication>> selectFamilyMember() {
+    @PostMapping(value = "/unLogin")
+    public Result<List<Jurisdication>> unLogin() {
         List<Jurisdication> jurisdications = jurisdictionService.queryAll();
         return Result.success(jurisdications);
     }

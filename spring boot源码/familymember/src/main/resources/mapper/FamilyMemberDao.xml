@@ -76,7 +76,7 @@
                 MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 2 DAY ), 6, 5),
                 MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 3 DAY ), 6, 5),
                 MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 4 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 5 DAY ), 6, 5));
+                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 5 DAY ), 6, 5))
         ORDER BY date_of_birth ASC
     </select>
 

@@ -22,10 +22,10 @@ public class HomeController {
     private IHomeService homeService;
 
     /**
-     * 查询当天发布的通知
-     * */
+     * 查询当天发布的通知和生日
+     */
     @PostMapping(value = "/homeData")
-    public Result<Map<String,Object>> homeData(){
+    public Result<Map<String, Object>> homeData() {
         Map<String, Object> map = homeService.nowDayNotice();
         return Result.success(map);
     }

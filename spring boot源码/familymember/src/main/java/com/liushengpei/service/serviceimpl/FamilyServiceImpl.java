@@ -197,7 +197,7 @@ public class FamilyServiceImpl implements IFamilyService {
         examine.setExamineTime(new Date());
         //户主id查询户主名字
         String name = houseSituationDao.queryName(houseId);
-        if (name != null || name.equals("")) {
+        if (name != null && name.equals("")) {
             examine.setSubmitUser(name);
         } else {
             examine.setSubmitUser("admin");

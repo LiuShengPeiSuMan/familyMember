@@ -1,0 +1,20 @@
+Android Studio:
+	SDK7.0（24）
+	Android7.0
+	JDK1.8
+	适配5.2英寸手机屏幕
+
+
+spring boot:
+	JDK1.8
+	maven3.6.3
+	springboot2.5.3
+
+
+spring cloud:
+	spring cloud alibaba版本：2021.1
+	spring boot版本：2.3.12.RELEASE
+	gateway网关版本：2.2.9.RELEASE
+	nacos版本：1.4.1
+	JDK版本：1.8
+	maven版本：3.6.2

@@ -49,4 +49,9 @@ public interface UserLoginDao {
      * 查询登录邮箱个数
      */
     Integer queryEmailCount(String loginEmail);
+
+    /**
+     * 查询登录用户详细信息
+     */
+    UserLogin queryUserLogin(String id);
 }

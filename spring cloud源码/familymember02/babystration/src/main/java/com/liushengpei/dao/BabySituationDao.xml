@@ -49,4 +49,12 @@
         WHERE del_flag = 0
           AND id = #{id}
     </select>
+
+    <!--   查询本年度出生日期 -->
+    <select id="yearData" resultType="date">
+        SELECT date_of_birth
+        FROM baby_situation
+        WHERE DATE_FORMAT(date_of_birth, '%y') = DATE_FORMAT(CURDATE(), '%y')
+          AND del_flag = 0
+    </select>
 </mapper>

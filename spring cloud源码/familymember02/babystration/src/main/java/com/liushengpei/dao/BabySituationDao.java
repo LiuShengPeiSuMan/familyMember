@@ -3,6 +3,7 @@ package com.liushengpei.dao;
 import com.liushengpei.pojo.BabySituation;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -27,4 +28,9 @@ public interface BabySituationDao {
      * 查询出生成员信息
      */
     BabySituation queryBaby(String id);
+
+    /**
+     * 查询本年度数据
+     */
+    List<Date> yearData();
 }

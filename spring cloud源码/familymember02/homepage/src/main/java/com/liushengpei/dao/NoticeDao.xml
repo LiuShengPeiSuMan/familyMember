@@ -22,6 +22,6 @@
         SELECT *
         FROM notice
         WHERE del_flag = 0
-          AND TO_DAYS(create_time) = TO_DAYS(NOW())
+          AND TO_DAYS(notice_time) = TO_DAYS(NOW())
     </select>
 </mapper>

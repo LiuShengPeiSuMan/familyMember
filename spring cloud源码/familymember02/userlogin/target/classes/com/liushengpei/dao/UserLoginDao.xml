@@ -83,4 +83,13 @@
         WHERE del_flag = 0
           AND login_email = #{loginEmail}
     </select>
+
+    <!--    查询登录用户详细信息-->
+    <select id="queryUserLogin" parameterType="string" resultType="com.liushengpei.pojo.UserLogin"
+            resultMap="userlogin">
+        SELECT *
+        FROM user_login
+        WHERE del_flag = 0
+          AND id = #{id}
+    </select>
 </mapper>

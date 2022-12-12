@@ -37,4 +37,9 @@ public interface IForeignService {
      * 查询户主id
      */
     String queryHouseId(String id);
+
+    /**
+     * 更新家庭成员简介年龄
+     */
+    Integer updateAge(String id);
 }

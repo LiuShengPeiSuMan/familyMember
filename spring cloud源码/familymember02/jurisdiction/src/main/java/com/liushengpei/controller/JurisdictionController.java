@@ -32,6 +32,20 @@ public class JurisdictionController {
     }
 
     /**
+     * 查询登录人的详细信息
+     *
+     * @param id 登录人id
+     */
+    @PostMapping(value = "/queryUserLogin")
+    public Result<UserLogin> queryUserLogin(@RequestParam(value = "id", defaultValue = "", required = false) String id) {
+        if (id == null || id.equals("")) {
+            return Result.fail("登录id不能为空");
+        }
+        UserLogin login = jurisdictionService.queryUserLogin(id);
+        return Result.success(login);
+    }
+
+    /**
      * 查询未有登录权限的用户
      */
     @PostMapping(value = "/unLogin")
@@ -64,36 +78,42 @@ public class JurisdictionController {
     /**
      * 重置登录密码
      *
-     * @param id 用户登录id
+     * @param id        用户登录id
+     * @param loginName 登录人
+     * @param account   登录账号
      */
     @PostMapping(value = "/resetPassword")
     public Result<String> resetPassword(@RequestParam(value = "id", defaultValue = "", required = false) String id,
-                                        @RequestParam(value = "loginName", defaultValue = "", required = false) String loginName) {
+                                        @RequestParam(value = "loginName", defaultValue = "", required = false) String loginName,
+                                        @RequestParam(value = "account", defaultValue = "", required = false) String account) {
         if (id == null || id.equals("")) {
             return Result.fail("id不能为空");
         }
         if (loginName == null || loginName.equals("")) {
             return Result.fail("登录人不能为空");
         }
-        String msg = jurisdictionService.resetPwd(id, loginName);
+        String msg = jurisdictionService.resetPwd(id, loginName, account);
         return Result.success(msg);
     }
 
     /**
      * 解除登录权限
      *
-     * @param id 用户登录id
+     * @param id        用户登录id
+     * @param loginName 登录人
+     * @param account   登录账号
      */
     @PostMapping(value = "/relievePassword")
     public Result<String> relievePassword(@RequestParam(value = "id", defaultValue = "", required = false) String id,
-                                          @RequestParam(value = "loginName", defaultValue = "", required = false) String loginName) {
+                                          @RequestParam(value = "loginName", defaultValue = "", required = false) String loginName,
+                                          @RequestParam(value = "account", defaultValue = "", required = false) String account) {
         if (id == null || id.equals("")) {
             return Result.fail("id不能为空");
         }
         if (loginName == null || loginName.equals("")) {
             return Result.fail("登录人不能为空");
         }
-        String msg = jurisdictionService.relievePwd(id, loginName);
+        String msg = jurisdictionService.relievePwd(id, loginName, account);
         return Result.success(msg);
 
     }

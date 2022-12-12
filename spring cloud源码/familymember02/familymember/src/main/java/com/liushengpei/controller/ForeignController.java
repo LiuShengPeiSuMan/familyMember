@@ -106,4 +106,23 @@ public class ForeignController {
         List<FamilyMember> list = foreignService.queryDateOfBirth();
         return list;
     }
+
+    /**
+     * 查询男女比例
+     */
+    @PostMapping(value = "/manAndWomanNum")
+    public List<Map<String, Object>> manAndWomanNum() {
+        List<Map<String, Object>> maps = foreignService.manAndWomanNum();
+        return maps;
+    }
+
+    /**
+     * 查询所有人年龄
+     */
+    @PostMapping(value = "/queryAllAge")
+    public List<Integer> queryAllAge() {
+        List<Integer> age = foreignService.queryAllAge();
+        return age;
+    }
+
 }

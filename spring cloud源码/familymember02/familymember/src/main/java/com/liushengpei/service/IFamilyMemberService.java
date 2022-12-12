@@ -16,4 +16,10 @@ public interface IFamilyMemberService {
      * 查询所有家族成员
      */
     List<FamilyMember> familyMemberList();
+
+
+    /**
+     * 定时增加年龄
+     */
+    void addAge();
 }

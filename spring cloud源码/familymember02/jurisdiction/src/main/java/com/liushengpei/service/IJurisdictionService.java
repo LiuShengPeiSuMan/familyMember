@@ -16,6 +16,11 @@ public interface IJurisdictionService {
     List<UserLogin> queryLoginAll();
 
     /**
+     * 查询登录人详细信息
+     */
+    UserLogin queryUserLogin(String id);
+
+    /**
      * 查询未赋予登录权限的用户
      */
     List<FamilyMember> unUserLogin();
@@ -28,10 +33,10 @@ public interface IJurisdictionService {
     /**
      * 重置登录密码
      */
-    String resetPwd(String id,String loginName);
+    String resetPwd(String id, String loginName, String account);
 
     /**
      * 解除用户登录权限
      */
-    String relievePwd(String id,String loginName);
+    String relievePwd(String id, String loginName, String account);
 }

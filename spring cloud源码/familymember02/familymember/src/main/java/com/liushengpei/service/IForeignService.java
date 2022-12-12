@@ -44,4 +44,16 @@ public interface IForeignService {
      * 查询一周之内过生日的人
      */
     List<FamilyMember> queryDateOfBirth();
+
+    /**
+     * 查询男女人数
+     */
+    List<Map<String, Object>> manAndWomanNum();
+
+    /**
+     * 查询所有人的年龄
+     */
+    List<Integer> queryAllAge();
+
+
 }

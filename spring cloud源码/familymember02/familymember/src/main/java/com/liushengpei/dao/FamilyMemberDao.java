@@ -46,4 +46,24 @@ public interface FamilyMemberDao {
      * 查询一周之内过生日的人
      */
     List<FamilyMember> queryDateOfBirth();
+
+    /**
+     * 查询男女人数
+     */
+    List<Map<String, Object>> manAndWomanNum();
+
+    /**
+     * 查询所有人的年龄
+     */
+    List<Integer> queryAllAge();
+
+    /**
+     * 查询今天过生日的成员
+     */
+    List<FamilyMember> selectNowDay();
+
+    /**
+     * 增加年龄
+     */
+    Integer updateAge(Map<String, Object> params);
 }

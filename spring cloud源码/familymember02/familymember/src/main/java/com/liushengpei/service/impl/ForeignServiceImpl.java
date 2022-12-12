@@ -93,4 +93,23 @@ public class ForeignServiceImpl implements IForeignService {
         List<FamilyMember> familyMemberList = memberDao.queryDateOfBirth();
         return familyMemberList;
     }
+
+    /**
+     * 查询男女人数
+     */
+    @Override
+    public List<Map<String, Object>> manAndWomanNum() {
+        List<Map<String, Object>> maps = memberDao.manAndWomanNum();
+        return maps;
+    }
+
+    /**
+     * 查询所有人的年龄
+     */
+    @Override
+    public List<Integer> queryAllAge() {
+        List<Integer> queryAllAge = memberDao.queryAllAge();
+        return queryAllAge;
+    }
+
 }

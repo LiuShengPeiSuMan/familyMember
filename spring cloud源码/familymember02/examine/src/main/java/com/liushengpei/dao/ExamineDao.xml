@@ -69,4 +69,13 @@
           AND examine_status = 0
           AND babyorpeople_id = #{familyPeopleId}
     </select>
+
+    <!--    查询本年都提交的审核记录-->
+    <select id="examineYear" parameterType="string" resultType="list" resultMap="examine">
+        SELECT *
+        FROM examine
+        WHERE del_flag = 0
+          AND DATE_FORMAT(examine_time, '%Y') = DATE_FORMAT(SYSDATE(), '%Y')
+          AND house_id = #{houseId}
+    </select>
 </mapper>

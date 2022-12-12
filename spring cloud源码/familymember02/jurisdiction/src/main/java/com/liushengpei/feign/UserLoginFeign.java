@@ -44,4 +44,10 @@ public interface UserLoginFeign {
      */
     @PostMapping(value = "/foreign/emailCount")
     Integer emailCount(@RequestParam(value = "email", defaultValue = "", required = false) String email);
+
+    /**
+     * 查询登录用户的详细信息
+     */
+    @PostMapping(value = "/foreign/queryUserLogin")
+    UserLogin queryUserLogin(@RequestParam(value = "id", defaultValue = "", required = false) String id);
 }

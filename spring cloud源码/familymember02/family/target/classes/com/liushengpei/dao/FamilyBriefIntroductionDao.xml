@@ -87,4 +87,13 @@
             update_user=#{updateUser}
         WHERE family_people_id = #{familyPeopleId}
     </update>
+
+    <!--    更新年龄-->
+    <update id="updateFamilyAge" parameterType="map">
+        UPDATE family_brief_introduction
+        SET age=age + 1,
+            update_time=#{updateTime}
+        WHERE del_flag = 0
+          AND family_people_id = #{familyPeopleId}
+    </update>
 </mapper>

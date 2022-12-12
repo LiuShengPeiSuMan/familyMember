@@ -86,4 +86,16 @@ public class ForeignController {
         Integer count = foreignService.emailCount(email);
         return count;
     }
+
+    /**
+     * 查询登录用户的详细信息
+     */
+    @PostMapping(value = "/queryUserLogin")
+    public UserLogin queryUserLogin(@RequestParam(value = "id", defaultValue = "", required = false) String id) {
+        if (id == null || id.equals("")) {
+            return null;
+        }
+        UserLogin login = foreignService.queryUserLogin(id);
+        return login;
+    }
 }

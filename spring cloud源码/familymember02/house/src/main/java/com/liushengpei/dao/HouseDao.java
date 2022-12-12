@@ -38,4 +38,9 @@ public interface HouseDao {
      * 查询户主id
      */
     String queryHouseId(String familyPeopleId);
+
+    /**
+     * 查询户主id，根据名称
+     */
+    String queryHouseIdByName(String name);
 }

@@ -3,6 +3,7 @@ package com.liushengpei.controller;
 import com.liushengpei.pojo.FamilyMember;
 import com.liushengpei.service.IFamilyMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import util.resultutil.Result;
 
@@ -41,4 +42,14 @@ public class FamilyMemberController {
         return Result.success(familyMember);
     }
 
+    /**
+     * 定时任务，自动更新年龄
+     */
+    //@Scheduled(cron = "0 40 14 * * ? ")
+    @Scheduled(cron = "0 0 0 * * ? ")
+    public void addAge() {
+        System.err.println("定时任务已启动");
+        memberService.addAge();
+        System.err.println("定时任务已关闭");
+    }
 }

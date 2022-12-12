@@ -5,6 +5,9 @@ import com.liushengpei.service.IForeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * 对外提供接口
  */
@@ -37,5 +40,14 @@ public class ForeignController {
         }
         String msg = foreignService.addBaby(babySituation);
         return msg;
+    }
+
+    /**
+     * 查询本年度出生成员每月人数
+     */
+    @PostMapping(value = "/yearData")
+    public List<Date> yearData() {
+        List<Date> babyDate = foreignService.yearData();
+        return babyDate;
     }
 }

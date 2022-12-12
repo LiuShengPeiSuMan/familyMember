@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,5 +92,17 @@ public class ForeignServiceImpl implements IForeignService {
     public String queryHouseId(String id) {
         String houseId = houseDao.selectHouseId(id);
         return houseId;
+    }
+
+    /**
+     * 更新家族成员简介年龄
+     */
+    @Override
+    public Integer updateAge(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("familyPeopleId", id);
+        params.put("updateTime", new Date());
+        Integer integer = introductionDao.updateFamilyAge(params);
+        return integer;
     }
 }

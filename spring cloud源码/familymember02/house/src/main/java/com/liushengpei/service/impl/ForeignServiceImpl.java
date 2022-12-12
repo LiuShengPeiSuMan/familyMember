@@ -49,4 +49,13 @@ public class ForeignServiceImpl implements IForeignService {
         String houseId = houseDao.queryHouseId(familyPeopleId);
         return houseId;
     }
+
+    /**
+     * 根据名称查询户主id
+     */
+    @Override
+    public String queryHouseIdByName(String name) {
+        String houseId = houseDao.queryHouseIdByName(name);
+        return houseId;
+    }
 }

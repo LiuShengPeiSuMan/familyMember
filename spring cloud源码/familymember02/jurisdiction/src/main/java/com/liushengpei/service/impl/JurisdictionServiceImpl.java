@@ -4,6 +4,7 @@ import com.liushengpei.feign.FamilyMemberFeign;
 import com.liushengpei.feign.UserLoginFeign;
 import com.liushengpei.service.IJurisdictionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.domain.FamilyMember;
 import util.domain.UserLogin;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static util.constant.ConstantToolUtil.PUTONG;
+import static util.constant.ConstantToolUtil.USER_LOGIN;
 
 /**
  * 权限管理
@@ -26,6 +28,8 @@ public class JurisdictionServiceImpl implements IJurisdictionService {
     private FamilyMemberFeign memberFeign;
     @Autowired
     private UserLoginFeign loginFeign;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 查询用户登录权限
@@ -34,6 +38,15 @@ public class JurisdictionServiceImpl implements IJurisdictionService {
     public List<UserLogin> queryLoginAll() {
         List<UserLogin> userLogins = loginFeign.queryLoginList();
         return userLogins;
+    }
+
+    /**
+     * 查询登录人详细信息
+     */
+    @Override
+    public UserLogin queryUserLogin(String id) {
+        UserLogin login = loginFeign.queryUserLogin(id);
+        return login;
     }
 
     /**
@@ -104,13 +117,15 @@ public class JurisdictionServiceImpl implements IJurisdictionService {
      * 重置登录密码
      */
     @Override
-    public String resetPwd(String id, String loginName) {
+    public String resetPwd(String id, String loginName, String account) {
         //随机生成8位数密码
         String password = UUID.randomUUID().toString().substring(0, 8);
         Integer num = loginFeign.updatePwd(password, id, loginName);
         if (num == 0) {
             return "重置密码失败";
         }
+        //删除缓存
+        redisTemplate.delete(USER_LOGIN + account);
         return "重置密码成功！";
     }
 
@@ -118,11 +133,13 @@ public class JurisdictionServiceImpl implements IJurisdictionService {
      * 解除用户登录权限
      */
     @Override
-    public String relievePwd(String id, String loginName) {
+    public String relievePwd(String id, String loginName, String account) {
         Integer relieve = loginFeign.relieve(id, loginName);
         if (relieve == 0) {
             return "解除登录权限失败";
         }
+        //删除缓存
+        redisTemplate.delete(USER_LOGIN + account);
         return "解除登录权限成功";
     }
 

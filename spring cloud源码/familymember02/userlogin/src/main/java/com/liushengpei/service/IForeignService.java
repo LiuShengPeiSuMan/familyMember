@@ -31,4 +31,9 @@ public interface IForeignService {
      * 查询登录邮箱个数
      */
     Integer emailCount(String email);
+
+    /**
+     * 查询登录用户的详细信息
+     */
+    UserLogin queryUserLogin(String id);
 }

@@ -6,6 +6,9 @@ import com.liushengpei.service.IForeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * 对外提供接口逻辑
  */
@@ -38,5 +41,14 @@ public class ForeignServiceImpl implements IForeignService {
             return "添加成功";
         }
         return "添加失败";
+    }
+
+    /**
+     * 查询本年度数据
+     */
+    @Override
+    public List<Date> yearData() {
+        List<Date> dates = situationDao.yearData();
+        return dates;
     }
 }

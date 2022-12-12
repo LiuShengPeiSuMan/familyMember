@@ -60,4 +60,16 @@ public class ForeignController {
         String houseId = foreignService.queryHouseId(familyMemberId);
         return houseId;
     }
+
+    /**
+     * 根据名称查询户主id
+     */
+    @PostMapping(value = "/houseId")
+    public String houseId(@RequestParam(value = "name", defaultValue = "", required = false) String name) {
+        if (name == null || name.equals("")) {
+            return "登录人姓名不能为空";
+        }
+        String houseId = foreignService.queryHouseIdByName(name);
+        return houseId;
+    }
 }

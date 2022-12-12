@@ -23,5 +23,10 @@ public interface IExamineService {
     /**
      * 通过或驳回
      */
-    String adoptAndReject(String id,Integer type, Integer status, String examineUser);
+    String adoptAndReject(String id, Integer type, Integer status, String examineUser);
+
+    /**
+     * 查询每个户主本年度提交的审核记录
+     */
+    List<Examine> houseExamineHistory(String loginName);
 }

@@ -46,4 +46,9 @@ public interface FamilyBriefIntroductionDao {
      * 删除家庭成员简介
      */
     Integer delIntroduction(Map<String, Object> params);
+
+    /**
+     * 更新年龄
+     */
+    Integer updateFamilyAge(Map<String, Object> params);
 }

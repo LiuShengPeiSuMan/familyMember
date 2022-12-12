@@ -120,4 +120,53 @@
         WHERE id = #{id}
     </update>
 
+    <!--    查询一周只能过生日的成员-->
+    <select id="queryDateOfBirth" resultType="list" resultMap="familymember">
+        SELECT *
+        FROM family_member
+        WHERE del_flag = 0
+          AND MID(date_of_birth, 6, 5) IN (
+                                           MID(DATE_ADD(curdate(), INTERVAL + 0 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 1 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 2 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 3 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 4 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 5 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 6 DAY ), 6, 5))
+        ORDER BY date_of_birth ASC
+    </select>
+
+    <!--    查询男女人数-->
+    <select id="manAndWomanNum" resultType="hashmap">
+        SELECT CASE sex WHEN '1' THEN '男' WHEN '0' THEN '女' END AS sex, COUNT(*) num
+        FROM family_member
+        WHERE del_flag = 0
+        GROUP BY sex
+    </select>
+
+    <!--    查询所有人的年龄-->
+    <select id="queryAllAge" resultType="integer">
+        SELECT age
+        FROM family_member
+        WHERE del_flag = 0
+    </select>
+
+    <!--    查询当天生日家族成员-->
+    <select id="selectNowDay" resultType="list" resultMap="familymember">
+        SELECT *
+        FROM family_member
+        WHERE del_flag = 0
+            AND date_of_birth IS NOT NULL
+            AND MONTH (
+            date_of_birth ) = MONTH (NOW())
+          AND DAY ( date_of_birth ) = DAY (NOW())
+    </select>
+
+    <!--    增加年龄-->
+    <update id="updateAge" parameterType="map">
+        UPDATE family_member
+        SET age=age + 1,
+            update_time=#{updateTime}
+        WHERE id = #{id}
+    </update>
 </mapper>

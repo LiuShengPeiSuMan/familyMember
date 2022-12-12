@@ -73,4 +73,13 @@ public class ForeignServiceImpl implements IForeignService {
         Integer count = loginDao.queryEmailCount(email);
         return count;
     }
+
+    /**
+     * 查询登录用户的详细信息
+     */
+    @Override
+    public UserLogin queryUserLogin(String id) {
+        UserLogin login = loginDao.queryUserLogin(id);
+        return login;
+    }
 }

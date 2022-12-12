@@ -248,4 +248,17 @@ public class ExamineServiceImpl implements IExamineService {
         params.put("examineUser", examineUser);
         examineDao.updateExamine(params);
     }
+
+    /**
+     * 查询提交审核记录
+     *
+     * @param loginName 登录人姓名
+     */
+    @Override
+    public List<Examine> houseExamineHistory(String loginName) {
+        String houseId = houseFeign.houseId(loginName);
+        List<Examine> examines = examineDao.examineYear(houseId);
+        return examines;
+    }
+
 }

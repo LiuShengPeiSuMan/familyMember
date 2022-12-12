@@ -69,4 +69,11 @@
           AND family_people_id = #{familyPeopleId}
     </select>
 
+    <!--    查询户主id，根据姓名-->
+    <select id="queryHouseIdByName" parameterType="string" resultType="string">
+        SELECT id
+        FROM house_situation
+        WHERE del_flag = 0
+          AND name = #{name}
+    </select>
 </mapper>

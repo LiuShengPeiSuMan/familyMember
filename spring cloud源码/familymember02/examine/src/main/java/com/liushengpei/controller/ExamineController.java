@@ -76,4 +76,18 @@ public class ExamineController {
         String message = examineService.adoptAndReject(id, type, status, examineUser);
         return Result.success(message);
     }
+
+    /**
+     * 户主查询提交的审核记录
+     *
+     * @param loginName 登录人姓名
+     */
+    @PostMapping(value = "/houseExamineHistory")
+    public Result<List<Examine>> houseExamineHistory(@RequestParam(value = "loginName", defaultValue = "", required = false) String loginName) {
+        if (loginName == null || loginName.equals("")) {
+            return Result.fail("登录人不能为空");
+        }
+        List<Examine> examines = examineService.houseExamineHistory(loginName);
+        return Result.success(examines);
+    }
 }

@@ -36,6 +36,11 @@ public interface ExamineDao {
 
     /**
      * 查询有没有重复
-     * */
+     */
     Integer countExamine(String familyPeopleId);
+
+    /**
+     * 查询本年度提交的审核数据
+     */
+    List<Examine> examineYear(String houseId);
 }

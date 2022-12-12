@@ -21,4 +21,9 @@ public interface IForeignService {
      * 根据家族成员id查询户主id
      */
     String queryHouseId(String familyPeopleId);
+
+    /**
+     * 根据名称查询户主id
+     */
+    String queryHouseIdByName(String name);
 }

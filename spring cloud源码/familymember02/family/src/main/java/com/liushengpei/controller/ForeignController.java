@@ -103,4 +103,18 @@ public class ForeignController {
         String houseId = foreignService.queryHouseId(familyPeopleId);
         return houseId;
     }
+
+    /**
+     * 更新家族成员简介年龄
+     *
+     * @param familyPeopleId 家族成员id
+     */
+    @PostMapping(value = "/updateFamilyAge")
+    public Integer updateFamilyAge(@RequestParam(value = "familyPeopleId", defaultValue = "", required = false) String familyPeopleId) {
+        if (familyPeopleId == null || familyPeopleId.equals("")) {
+            return 0;
+        }
+        Integer num = foreignService.updateAge(familyPeopleId);
+        return num;
+    }
 }

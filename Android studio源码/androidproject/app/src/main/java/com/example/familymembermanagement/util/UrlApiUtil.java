@@ -162,7 +162,7 @@ public class UrlApiUtil {
     /**
      * 查询姓名和邮箱
      */
-    public static final String SELECT_NAME_EMAIL = "http://" + ip + ":" + port + "/jurisdiction/selectNameEmail";
+    public static final String UNLOGIN = "http://" + ip + ":" + port + "/jurisdiction/unLogin";
 
     /**
      * 添加用户权限

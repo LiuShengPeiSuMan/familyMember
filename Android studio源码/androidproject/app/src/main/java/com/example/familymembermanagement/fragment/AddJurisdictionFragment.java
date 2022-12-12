@@ -1,8 +1,7 @@
 package com.example.familymembermanagement.fragment;
 
 import static com.example.familymembermanagement.util.UrlApiUtil.ADD_LOGIN_PUTONG;
-import static com.example.familymembermanagement.util.UrlApiUtil.SELECT_NAME_EMAIL;
-import static com.example.familymembermanagement.util.UrlApiUtil.USER_LOGIN;
+import static com.example.familymembermanagement.util.UrlApiUtil.UNLOGIN;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -142,7 +141,7 @@ public class AddJurisdictionFragment extends Fragment implements UnifiedRuleFrag
         JurisdReturnData jurisdReturnData = gson.fromJson(data, JurisdReturnData.class);
         List<Jurisd> jurisds = jurisdReturnData.getData();
         listNot = new ArrayList<>();
-        if (!jurisds.isEmpty()) {
+        if (jurisds != null) {
             for (Jurisd j : jurisds) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("name", j.getName());
@@ -184,7 +183,7 @@ public class AddJurisdictionFragment extends Fragment implements UnifiedRuleFrag
         Message message = new Message();
         //构造Request对象
         Request.Builder builder = new Request.Builder();
-        builder.url(SELECT_NAME_EMAIL);
+        builder.url(UNLOGIN);
         //单个参数的请求
         FormBody formBody = new FormBody.Builder().build();
         builder.post(formBody);

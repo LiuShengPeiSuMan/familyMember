@@ -68,15 +68,14 @@
         SELECT *
         FROM family_member
         WHERE del_flag = 0
-          AND MID(date_of_birth, 6, 5)
-            IN (
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) + 1 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) + 0 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 1 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 2 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 3 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 4 DAY ), 6, 5),
-                MID(date_sub(curdate(), INTERVAL WEEKDAY( curdate()) - 5 DAY ), 6, 5))
+          AND MID(date_of_birth, 6, 5) IN (
+                                           MID(DATE_ADD(curdate(), INTERVAL + 0 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 1 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 2 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 3 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 4 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 5 DAY ), 6, 5),
+                                           MID(DATE_ADD(curdate(), INTERVAL + 6 DAY ), 6, 5))
         ORDER BY date_of_birth ASC
     </select>
 

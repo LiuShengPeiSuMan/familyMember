@@ -11,7 +11,7 @@
         android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:src="@mipmap/baby" />
+        android:src="@mipmap/newbaby" />
 
     <TextView
         android:id="@+id/add_title"

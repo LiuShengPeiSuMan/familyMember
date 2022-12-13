@@ -426,13 +426,29 @@ public class StatisticsFragment extends Fragment implements UnifiedRuleFragment 
         String[] sex = {"男", "女"};
         Integer[] num = new Integer[2];
         ArrayList<PieEntry> entries = new ArrayList<>();
-        for (SexNumber s : proportion) {
-            if (s.getSex().equals("男")) {
-                num[0] = s.getNum();
-            } else if (s.getSex().equals("女")) {
-                num[1] = s.getNum();
+        if (proportion.size() > 1) {
+            for (SexNumber s : proportion) {
+                if (s.getSex().equals("男")) {
+                    num[0] = s.getNum();
+                } else if (s.getSex().equals("女")) {
+                    num[1] = s.getNum();
+                }
+            }
+        } else {
+            for (SexNumber s : proportion) {
+                if (s.getSex().equals("男")) {
+                    num[0] = s.getNum();
+                } else {
+                    num[0] = 0;
+                }
+                if (s.getSex().equals("女")) {
+                    num[1] = s.getNum();
+                } else {
+                    num[1] = 0;
+                }
             }
         }
+
         //饼形图需要添加的数据
         Integer i = num[0]; //男
         Integer j = num[1]; //女

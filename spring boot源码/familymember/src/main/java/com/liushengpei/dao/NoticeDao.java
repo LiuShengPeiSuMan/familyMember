@@ -3,7 +3,6 @@ package com.liushengpei.dao;
 import com.liushengpei.pojo.Notice;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

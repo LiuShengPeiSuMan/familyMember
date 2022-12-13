@@ -19,11 +19,11 @@
         <!--        审核人-->
         <result column="examine_user" jdbcType="VARCHAR" property="examineUser"/>
         <!--        审核时间-->
-        <result column="examine_time" jdbcType="DATE" property="examineTime"/>
+        <result column="examine_time" jdbcType="TIMESTAMP" property="examineTime"/>
         <!--        提交审核人-->
         <result column="submit_user" jdbcType="VARCHAR" property="submitUser"/>
         <!--        创建时间-->
-        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <!--        删除标记-->
         <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
     </resultMap>

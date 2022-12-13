@@ -11,11 +11,11 @@
         <!--        头像-->
         <result column="image" jdbcType="BLOB" property="image"/>
         <!--        创建时间-->
-        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <!--        创建人-->
         <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
         <!--        更新时间-->
-        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <!--        更新人-->
         <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
         <!--        删除标记-->

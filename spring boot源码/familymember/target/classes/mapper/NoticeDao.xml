@@ -12,7 +12,7 @@
         <!--        通知内容-->
         <result column="notice_content" jdbcType="VARCHAR" property="noticeContent"/>
         <!--        通知时间-->
-        <result column="notice_time" jdbcType="DATE" property="noticeTime"/>
+        <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime"/>
         <!--        删除标记-->
         <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
     </resultMap>

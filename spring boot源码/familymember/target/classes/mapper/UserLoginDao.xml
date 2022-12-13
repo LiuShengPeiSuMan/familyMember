@@ -18,11 +18,11 @@
         <!--        角色（1：族长，2：户主，3：普通家族成员）-->
         <result column="role" jdbcType="INTEGER" property="role"/>
         <!--        创建时间-->
-        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <!--        创建者-->
         <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
         <!--        更新时间-->
-        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <!--        更新人-->
         <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
         <!--        删除标识-->

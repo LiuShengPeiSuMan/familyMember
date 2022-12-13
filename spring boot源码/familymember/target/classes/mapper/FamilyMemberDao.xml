@@ -16,7 +16,7 @@
         <!--        家庭住址-->
         <result column="home_address" jdbcType="VARCHAR" property="homeAddress"/>
         <!--        出生日期-->
-        <result column="date_of_birth" property="dateOfBirth"/>
+        <result column="date_of_birth" jdbcType="DATE" property="dateOfBirth"/>
         <!--        死亡日期-->
         <result column="date_of_death" jdbcType="DATE" property="dateOfDeath"/>
         <!--        是否已婚（1：是，0：否）-->

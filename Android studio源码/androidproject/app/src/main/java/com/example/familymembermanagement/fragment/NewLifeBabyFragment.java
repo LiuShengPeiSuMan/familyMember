@@ -221,7 +221,8 @@ public class NewLifeBabyFragment extends Fragment implements UnifiedRuleFragment
             } else {
                 b_health.setText("亚健康");
             }
-            b_dateOfBirth.setText(babySituation.getDateOfBirth());
+            String[] s = babySituation.getDateOfBirth().split(" ");
+            b_dateOfBirth.setText(s[0]);
             b_addTime.setText(babySituation.getCreateTime());
             //弹出对话框
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -325,7 +326,7 @@ public class NewLifeBabyFragment extends Fragment implements UnifiedRuleFragment
     public void onClick(View view) {
         //跳转到添加户主页
         transaction = manager.beginTransaction();
-        transaction.replace(R.id.linearfragment, new AddBabyFragment(loginId, loginName,toolbar,nav,drawerLayout));
+        transaction.replace(R.id.linearfragment, new AddBabyFragment(loginId, loginName, toolbar, nav, drawerLayout));
         transaction.addToBackStack(null);
         transaction.commit();
     }

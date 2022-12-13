@@ -213,7 +213,8 @@ public class FamilyUpdateDeleteFragemnt extends Fragment implements UnifiedRuleF
                 in_isMarry.setText("否");
             }
             in_houseAddress.setText(familyMember.getHomeAddress());
-            in_date.setText(familyMember.getDateOfBirth());
+            String[] s = familyMember.getDateOfBirth().split(" ");
+            in_date.setText(s[0]);
             //学历
             String education = ToolUtil.education(familyMember.getEducation());
             System.err.println(education);

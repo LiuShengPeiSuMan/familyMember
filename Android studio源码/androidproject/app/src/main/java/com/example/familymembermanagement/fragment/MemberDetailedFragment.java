@@ -179,8 +179,8 @@ public class MemberDetailedFragment extends Fragment implements UnifiedRuleFragm
             }
             dfm_age.setText(familyMember.getAge().toString());
             dfm_homeaddress.setText(familyMember.getHomeAddress());
-            //Date dateOfBirth = familyMember.getDateOfBirth();
-            dfm_dateofbirth.setText(familyMember.getDateOfBirth());
+            String[] s = familyMember.getDateOfBirth().split(" ");
+            dfm_dateofbirth.setText(s[0]);
             Integer marriedOfNot = familyMember.getMarriedOfNot();
             if (marriedOfNot == 0) {
                 dfm_marriedofnot.setText("否");

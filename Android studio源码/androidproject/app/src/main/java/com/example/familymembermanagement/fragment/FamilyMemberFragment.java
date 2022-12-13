@@ -93,11 +93,12 @@ public class FamilyMemberFragment extends Fragment implements UnifiedRuleFragmen
         }
     };
 
-    public FamilyMemberFragment(Toolbar toolbar,NavigationView nav,DrawerLayout drawerLayout){
-        this.toolbar=toolbar;
-        this.nav=nav;
-        this.drawerLayout=drawerLayout;
+    public FamilyMemberFragment(Toolbar toolbar, NavigationView nav, DrawerLayout drawerLayout) {
+        this.toolbar = toolbar;
+        this.nav = nav;
+        this.drawerLayout = drawerLayout;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -128,7 +129,7 @@ public class FamilyMemberFragment extends Fragment implements UnifiedRuleFragmen
         } else {
             params.put("name", search);
         }
-        customDialog=new CustomDialog(getActivity(),"正在加载...");
+        customDialog = new CustomDialog(getActivity(), "正在加载...");
         customDialog.show();
         apiCall(params);
     }
@@ -280,7 +281,8 @@ public class FamilyMemberFragment extends Fragment implements UnifiedRuleFragmen
             }
             dfm_age.setText(familyMember.getAge().toString());
             dfm_homeaddress.setText(familyMember.getHomeAddress());
-            dfm_dateofbirth.setText(familyMember.getDateOfBirth());
+            String[] s = familyMember.getDateOfBirth().split(" ");
+            dfm_dateofbirth.setText(s[0]);
             Integer marriedOfNot = familyMember.getMarriedOfNot();
             if (marriedOfNot == 0) {
                 dfm_marriedofnot.setText("否");

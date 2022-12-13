@@ -195,10 +195,8 @@ public class HomeFragment extends Fragment implements UnifiedRuleFragment {
                     for (FamilyMember f : birthday) {
                         Map<String, Object> map = new HashMap<>();
                         map.put("name", f.getName());
-                        //日期格式转换
-//                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                        String format = dateFormat.format(f.getDateOfBirth());
-                        map.put("date", f.getDateOfBirth());
+                        String[] s = f.getDateOfBirth().split(" ");
+                        map.put("date", s[0]);
                         data01.add(map);
                     }
                     String[] from = {"name", "date"};

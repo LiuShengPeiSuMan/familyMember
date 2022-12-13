@@ -269,7 +269,8 @@ public class ExamineFragment extends Fragment implements UnifiedRuleFragment, Ad
                 }
                 mother.setText(baby.getMother());
                 father.setText(baby.getFather());
-                dateOfBirth.setText(baby.getDateOfBirth());
+                String[] s = baby.getDateOfBirth().split(" ");
+                dateOfBirth.setText(s[0]);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setView(v);
                 dialog = builder.create();
@@ -355,7 +356,8 @@ public class ExamineFragment extends Fragment implements UnifiedRuleFragment, Ad
                 }
                 meage.setText(familyMember.getAge().toString());
                 meaddress.setText(familyMember.getHomeAddress());
-                medayofbirth.setText(familyMember.getDateOfBirth());
+                String[] s = familyMember.getDateOfBirth().split(" ");
+                medayofbirth.setText(s[0]);
                 mereason.setText(reason);
                 //弹出对话框
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

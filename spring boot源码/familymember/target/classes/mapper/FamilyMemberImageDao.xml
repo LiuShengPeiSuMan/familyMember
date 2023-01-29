@@ -30,4 +30,12 @@
                 #{delFlag})
     </insert>
 
+    <!--    查询用户头像-->
+    <select id="selectImage" parameterType="string" resultType="com.liushengpei.pojo.FamilyMemberImage"
+            resultMap="familyMemberImage">
+        SELECT *
+        FROM family_member_image
+        WHERE id = #{id}
+    </select>
+
 </mapper>

@@ -13,4 +13,9 @@ public interface FamilyMemberImageDao {
      * 添加家族成员图片
      */
     Integer addImage(FamilyMemberImage familyMemberImage);
+
+    /**
+     * 查询用户头像
+     */
+    FamilyMemberImage selectImage(String id);
 }

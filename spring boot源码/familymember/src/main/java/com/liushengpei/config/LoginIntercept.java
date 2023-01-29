@@ -1,5 +1,6 @@
 package com.liushengpei.config;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -15,6 +16,7 @@ import static com.liushengpei.util.ConstantToolUtil.SESSION_USER;
 @Component
 public class LoginIntercept implements HandlerInterceptor {
 
+    @Order(1)
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();

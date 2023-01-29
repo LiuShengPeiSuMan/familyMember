@@ -21,7 +21,7 @@ public class EmailSendUtil {
      * @Param text 邮件内容
      */
     public static String pureTextEmail(JavaMailSenderImpl sender,String to, String subject, String text) {
-        JavaMailSenderImpl mailSender=new JavaMailSenderImpl();
+        //JavaMailSenderImpl mailSender=new JavaMailSenderImpl();
         String msg = "";
         //定制纯文本邮件信息
         SimpleMailMessage mailMessage = new SimpleMailMessage();

@@ -42,6 +42,8 @@ public class FamilyServiceImpl implements IFamilyService {
 
     /**
      * 添加家庭成员(户主添加)
+     *
+     * @param familyMembervo 家族成员信息
      */
     @Transactional
     @Override
@@ -197,7 +199,7 @@ public class FamilyServiceImpl implements IFamilyService {
         examine.setExamineTime(new Date());
         //户主id查询户主名字
         String name = houseSituationDao.queryName(houseId);
-        if (name != null && name.equals("")) {
+        if (name != null && !name.equals("")) {
             examine.setSubmitUser(name);
         } else {
             examine.setSubmitUser("admin");
